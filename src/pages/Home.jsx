@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Post from "../components/Post";
+import { useSelector } from "react-redux";
 
-function Home({ posts }) {
+function Home() {
+  const { posts } = useSelector((state) => state);
   const [filteredPosts, setFilteredPosts] = useState(posts);
   function handleClick(e) {
     if (e.target.tagName === "BUTTON") {

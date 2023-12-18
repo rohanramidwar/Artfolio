@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addPost } from "../redux/Slices/PostsSlice";
 
-function CreateArea({ onAdd }) {
+function CreateArea() {
+  const dispatch = useDispatch();
   const [src, setSrc] = useState(null);
   const [post, setPost] = useState({
     title: "",
@@ -24,8 +27,8 @@ function CreateArea({ onAdd }) {
     });
   }
 
-  function addPost() {
-    onAdd(post);
+  function handleClick() {
+    dispatch(addPost(post));
     navigate("/");
   }
   return (
@@ -58,7 +61,7 @@ function CreateArea({ onAdd }) {
         >
           cancel
         </button>
-        <button onClick={addPost}>post</button>
+        <button onClick={handleClick}>post</button>
       </form>
     </div>
   );

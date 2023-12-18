@@ -13,7 +13,7 @@ function Navbar() {
         <button>search</button>
       </div>
       <div>
-        <Link to="/">
+        <Link to="/cart">
           <button>cart</button>
         </Link>
         <Link to="/">
