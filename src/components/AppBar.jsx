@@ -1,27 +1,28 @@
-import { Search, ShoppingCart } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import ArtfolioLogo from "../assets/artfolio.png";
+import appLogo from "../assets/a_capital_blue.png";
+import { Search, ShoppingCart } from "lucide-react";
 import { Avatar } from "@mui/material";
 
 const AppBar = () => {
   return (
     <div>
-      <nav className="flex h-14 justify-between items-center px-6">
+      <nav className="flex justify-between items-center h-14 px-6 bg-gray-900 text-gray-100 border-b border-gray-700 mb-14">
         <Link to="/">
-          <img className="w-28" src={ArtfolioLogo} alt="Artfolio" />
+          <img className="w-28" src={appLogo} />
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex gap-6">
           <div className="flex">
-            <button className="bg-white rounded-l pl-2">
+            <button className="bg-gray-800 p-1 text-gray-500 border border-r-0 border-gray-700">
               <Search />
             </button>
             <input
-              className="h-8 rounded-r outline-none pl-2"
+              className="bg-gray-800 pl-1 outline-none placeholder-gray-500 border border-l-0 border-gray-700"
               placeholder="Search"
             />
           </div>
+
           <button>
             <Link to="/">
               <Avatar>R</Avatar>
@@ -29,7 +30,7 @@ const AppBar = () => {
           </button>
           <button>
             <Link to="cart">
-              <ShoppingCart color="#fff" />
+              <ShoppingCart />
             </Link>
           </button>
         </div>
