@@ -1,12 +1,10 @@
 import React from "react";
-import AppBar from "./components/AppBar";
 import { Route, Routes } from "react-router-dom";
+import AppBar from "./components/AppBar";
 import Home from "./pages/Home";
-import CreateArea from "./pages/CreateArea";
+import CreateForm from "./pages/CreateForm";
 import Cart from "./pages/Cart";
 
-import "@fontsource/inter";
-import "@fontsource/inter/400.css";
 import "./App.css";
 
 const App = () => {
@@ -15,9 +13,10 @@ const App = () => {
       <div>
         <AppBar />
       </div>
+
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="create" element={<CreateArea />} />
+        <Route path="create" element={<CreateForm />} />
         <Route path="cart" element={<Cart />} />
       </Routes>
     </div>

@@ -1,41 +1,37 @@
+import { Search, ShoppingCart } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Avatar } from "@mui/material";
-import { FiShoppingCart } from "react-icons/fi";
-import { FiSearch } from "react-icons/fi";
-
 import ArtfolioLogo from "../assets/artfolio.png";
+import { Avatar } from "@mui/material";
 
 const AppBar = () => {
   return (
-    <div style={{ background: "#2c2c2c" }}>
-      <nav className="flex justify-between items-center px-6 py-3">
-        <div>
-          <Link to="/">
-            <img src={ArtfolioLogo} width={150} alt="Artfolio" />
-          </Link>
-        </div>
-        <div className="flex gap-6 items-center">
+    <div>
+      <nav className="flex h-14 justify-between items-center px-6">
+        <Link to="/">
+          <img className="w-28" src={ArtfolioLogo} alt="Artfolio" />
+        </Link>
+
+        <div className="flex items-center gap-6">
           <div className="flex">
-            <button className="px-4" style={{ background: "#444444" }}>
-              <FiSearch size={20} />
+            <button className="bg-white rounded-l pl-2">
+              <Search />
             </button>
             <input
-              className="h-12 outline-none"
-              style={{ background: "#444444" }}
-              placeholder="find artist..."
+              className="h-8 rounded-r outline-none pl-2"
+              placeholder="Search"
             />
           </div>
-          <Link to="/">
-            <button>
+          <button>
+            <Link to="/">
               <Avatar>R</Avatar>
-            </button>
-          </Link>
-          <Link to="cart">
-            <button className="flex items-center">
-              <FiShoppingCart size={20} />
-            </button>
-          </Link>
+            </Link>
+          </button>
+          <button>
+            <Link to="cart">
+              <ShoppingCart color="#fff" />
+            </Link>
+          </button>
         </div>
       </nav>
     </div>

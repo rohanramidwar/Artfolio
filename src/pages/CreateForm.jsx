@@ -1,7 +1,7 @@
 import React from "react";
 
-const CreateArea = () => {
+const CreateForm = () => {
   return <div></div>;
 };
 
-export default CreateArea;
+export default CreateForm;
