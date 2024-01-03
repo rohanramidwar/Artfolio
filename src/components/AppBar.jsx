@@ -1,28 +1,20 @@
+import { Avatar } from "@mui/material";
+import { ShoppingCart } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import appLogo from "../assets/a_capital_blue.png";
-import { Search, ShoppingCart } from "lucide-react";
-import { Avatar } from "@mui/material";
 
 const AppBar = () => {
   return (
     <div>
-      <nav className="flex justify-between items-center h-14 px-6 bg-gray-900 text-gray-100 border-b border-gray-700 mb-14">
+      <nav
+        className="flex justify-between text-[#dbdee1]
+      items-center p-4 h-[64px] border-b-2 border-[#2b2d31]"
+      >
         <Link to="/">
-          <img className="w-28" src={appLogo} />
+          <span className="font-black text-3xl">Artfolio</span>
         </Link>
 
-        <div className="flex gap-6">
-          <div className="flex">
-            <button className="bg-gray-800 p-1 text-gray-500 border border-r-0 border-gray-700">
-              <Search />
-            </button>
-            <input
-              className="bg-gray-800 pl-1 outline-none placeholder-gray-500 border border-l-0 border-gray-700"
-              placeholder="Search"
-            />
-          </div>
-
+        <div className="flex gap-[18px]">
           <button>
             <Link to="/">
               <Avatar>R</Avatar>
