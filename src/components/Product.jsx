@@ -4,36 +4,33 @@ import { Heart, MessageCircle } from "lucide-react";
 
 const Product = () => {
   return (
-    <div className="pb-4 w-[349px] text-gray-100  bg-gray-800 rounded-lg">
+    <div className="flex flex-col bg-[#1e1f22] w-[359px] rounded-lg transtion duration-300 hover:-translate-y-2">
       <img
-        alt="Product Image"
         src="https://via.placeholder.com/400x250"
-        className="w-full h-48 object-cover rounded-t-lg"
+        className="h-40 object-cover w-full rounded-t-lg"
+        alt="img"
       />
 
-      <div className="p-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <Avatar sx={{ width: 32, height: 32, fontSize: 16 }}>R</Avatar>
-          <p className="text-base ml-2">artwithro</p>
+      <div className="flex justify-between p-4 text-[#a9aaac]">
+        <div className="flex gap-1">
+          <Avatar sx={{ width: 24, height: 24, fontSize: 12 }}>R</Avatar>
+          <p className="text-[#dbdee1] font-semibold">artwithro</p>
         </div>
-
-        <div className="flex space-x-2">
-          <button className="flex items-center text-gray-500">
+        <div className="flex gap-4">
+          <button className="flex gap-1">
             <Heart width={18} />
-            <p className="ml-1">1</p>
+            <span>1</span>
           </button>
-          <button className="flex items-center text-gray-500">
+          <button className="flex gap-1">
             <MessageCircle width={18} />
-            <p className="ml-1">1</p>
+            <span>1</span>
           </button>
         </div>
       </div>
 
-      <p className="pl-5 text-lg font-semibold mb-2">$99.99</p>
-
-      <Button style={{ marginLeft: 16 }} variant="outlined">
-        Add to cart
-      </Button>
+      <div className="flex flex-col p-4 gap-4">
+        <Button variant="outlined">US$4.99 | Add to cart</Button>
+      </div>
     </div>
   );
 };
