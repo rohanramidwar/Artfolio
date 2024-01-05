@@ -1,5 +1,5 @@
-import { Avatar } from "@mui/material";
-import { ShoppingCart } from "lucide-react";
+import { Avatar, Badge } from "@mui/material";
+import { LogOut, ShoppingCart } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -17,12 +17,19 @@ const AppBar = () => {
         <div className="flex gap-[18px]">
           <button>
             <Link to="/">
-              <Avatar>R</Avatar>
+              <Avatar />
             </Link>
           </button>
           <button>
             <Link to="cart">
-              <ShoppingCart />
+              <Badge badgeContent={3} color="success">
+                <ShoppingCart />
+              </Badge>
+            </Link>
+          </button>
+          <button>
+            <Link to="/">
+              <LogOut />
             </Link>
           </button>
         </div>

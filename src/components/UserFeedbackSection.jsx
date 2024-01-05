@@ -4,7 +4,7 @@ import SingleComment from "./SingleComment";
 
 const UserFeedbackSection = () => {
   return (
-    <div className="p-6 border-l-2 md:pl-[53px] border-[#2b2d31]">
+    <div className="p-6 md:border-l md:border-t-0 border-t border-[#43444b] ">
       <div className="flex flex-col w-[300px]">
         <h2 className="font-semibold text-xl mb-4">Feedback</h2>
 
@@ -18,6 +18,8 @@ const UserFeedbackSection = () => {
           />
         </label>
 
+        <SingleComment />
+        <SingleComment />
         <SingleComment />
       </div>
     </div>
