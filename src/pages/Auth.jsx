@@ -49,14 +49,14 @@ const Auth = () => {
           <GoogleAuthButton
             text={isLogIn ? "Sign in with Google" : "Sign up with Google"}
           />
-          <p
-            className="text-end text-sm mt-4 text-blue-500 cursor-pointer"
+          <a
+            className="text-end underline text-sm mt-4 text-blue-500 cursor-pointer"
             onClick={toggleAuthMode}
           >
             {isLogIn
               ? "Don't have an account? Sign up"
               : "Already have an account? Sign in"}
-          </p>
+          </a>
         </form>
       </div>
     </div>

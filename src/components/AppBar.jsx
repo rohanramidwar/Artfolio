@@ -16,7 +16,7 @@ const AppBar = () => {
 
         <div className="flex gap-[18px]">
           <button>
-            <Link to="/">
+            <Link to="profile">
               <Avatar />
             </Link>
           </button>

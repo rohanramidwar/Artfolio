@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-  background: gray;
+  font-family: "Nunito Sans";
+  background: #313338;
 }

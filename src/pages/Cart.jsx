@@ -8,7 +8,7 @@ const Cart = () => {
       <div className="flex flex-col">
         <h1 className="font-semibold text-2xl mb-4">Cart</h1>
         <div className="md:flex gap-4 justify-between   bg-[#2b2d31]">
-          <div className="flex flex-col gap-4 p-6  mb-4">
+          <div className="flex flex-col gap-4 p-6 md:w-[749px]  mb-4">
             <CartItem />
             <CartItem />
             <CartItem />
