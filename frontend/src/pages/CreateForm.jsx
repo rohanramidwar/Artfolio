@@ -2,10 +2,11 @@ import React from "react";
 
 import upload_img from "../assets/upload-img.png";
 
-import InputTitle from "../components/input fields/InputTitle";
-import InputDescription from "../components/input fields/InputDescription";
+import Input from "../components/input fields/Input";
+import MultilineInput from "../components/input fields/MultilineInput";
 import InputPrice from "../components/input fields/InputPrice";
 import SelectCategory from "../components/input fields/SelectCategory";
+import SubmitBtn from "../components/buttons/SubmitBtn";
 
 const CreateForm = () => {
   return (
@@ -13,13 +14,23 @@ const CreateForm = () => {
       <div className="w-[446px]">
         <h1 className="text-[3rem] font-semibold">Create</h1>
 
+        <p className="text-base font-normal text-gray-700">
+          Turn passion into profit,{" "}
+          <span className="underline decoration-green-500">monetize</span> your
+          art
+        </p>
+
         <form
           className="flex flex-col gap-7 mt-14"
           onSubmit={(e) => e.preventDefault()}
         >
-          <InputTitle />
+          <Input label={"Title"} type={"text"} placeholder={"Title"} />
 
-          <InputDescription />
+          <MultilineInput
+            label={"Description"}
+            type={"text"}
+            placeholder={"Description"}
+          />
 
           <label className="text-black-500 font-semibold">
             Art
@@ -33,9 +44,7 @@ const CreateForm = () => {
 
           <InputPrice />
 
-          <button className="w-full bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg p-2.5 text-white font-semibold text-sm">
-            Submit
-          </button>
+          <SubmitBtn text={"Submit"} />
         </form>
       </div>
     </div>
