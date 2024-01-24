@@ -10,12 +10,13 @@ import SubmitBtn from "../components/buttons/SubmitBtn";
 
 const CreateForm = () => {
   return (
-    <div className="flex justify-center mt-[125px]">
-      <div className="w-[446px]">
+    <div className="flex justify-center mt-8">
+      <div className="w-[446px] lg:mx-0 mx-6">
         <h1 className="text-[3rem] font-semibold">Create</h1>
 
         <p className="text-base font-normal text-gray-700">
-          Turn passion into profit,{" "}
+          Turn <span className="underline decoration-pink-500">passion</span>{" "}
+          into profit ,{" "}
           <span className="underline decoration-green-500">monetize</span> your
           art
         </p>
@@ -33,8 +34,8 @@ const CreateForm = () => {
           />
 
           <label className="text-black-500 font-semibold">
-            Art
-            <div className="mt-2.5 min-h-64 border border-dashed font-normal text-gray-700 text-sm border-gray-300 rounded-lg flex flex-col gap-2 items-center justify-center ">
+            Your art
+            <div className="mt-2.5 min-h-64 border-2 border-dashed font-normal text-gray-700 text-sm border-gray-300 rounded-lg flex flex-col gap-2 items-center justify-center ">
               <img src={upload_img} width={80} alt="upload img" />
               <p>Only upload media you own the rights to</p>
             </div>

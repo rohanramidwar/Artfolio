@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Input from "../components/input fields/Input";
 import SubmitBtn from "../components/buttons/SubmitBtn";
-
+import MultilineInput from "../components/input fields/MultilineInput";
 import google from "../assets/google.png";
 
 const Auth = () => {
@@ -10,8 +10,8 @@ const Auth = () => {
 
   return (
     <div>
-      <div className="flex justify-center mt-[125px]">
-        <div className="w-[388px]">
+      <div className="flex justify-center mt-8 ">
+        <div className="w-[388px] lg:mx-0 mx-6">
           <h1 className="text-[3rem] font-semibold">
             {isSignup ? "Sign up" : "Sign in"}
           </h1>
@@ -20,7 +20,7 @@ const Auth = () => {
             {isSignup ? "Already have an account? " : "Don't have an account? "}
             <button
               onClick={() => setisSignup(!isSignup)}
-              className="text-blue-500"
+              className="text-blue-600 hover:underline"
             >
               {isSignup ? "Sign in" : "Sign up"}
             </button>
@@ -44,6 +44,14 @@ const Auth = () => {
                   placeholder={"Potter"}
                 />
               </div>
+            )}
+
+            {isSignup && (
+              <MultilineInput
+                label={"About"}
+                type={"text"}
+                placeholder={"Tell about yourself"}
+              />
             )}
 
             <Input
