@@ -3,12 +3,5 @@
 @tailwind utilities;
 
 body {
-  background-color: #f5f7f9;
-  /* background-color: #f1e6ff; */
-  /* background-color: #8b33ff; */
-  font-family: "Work Sans";
-}
-
-h1 {
-  font-family: "Poppins";
+  font-family: "Inter";
 }

@@ -1,36 +1,30 @@
-import React from "react";
-import "@fontsource/poppins";
-import "@fontsource/poppins/600.css";
-import "@fontsource/work-sans";
-import "@fontsource/nunito-sans";
-import "@fontsource/nunito-sans/900.css";
-import { Heart, MessageCircle } from "lucide-react";
+import { React, useState } from "react";
 import { Avatar } from "@mui/material";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import CreateForm from "./pages/CreateForm";
-import Auth from "./pages/Auth";
-import Cart from "./pages/Cart";
-import ArtDetailsPage from "./pages/ArtDetailsPage";
-import ProfilePage from "./pages/ProfilePage";
+
+//font
+import "@fontsource/inter";
+import "@fontsource/inter/400.css";
+
+//logo
+import AppLogo from "./assets/Artfolio-logos_black.png";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <nav className="flex justify-between p-10">
+        <div>
+          <img src={AppLogo} width={101} alt="Artfolio" />
+        </div>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="create" element={<CreateForm />} />
-        <Route path="auth" element={<Auth />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="art-details" element={<ArtDetailsPage />} />
-        <Route path="profile" element={<ProfilePage />} />
-      </Routes>
-
-      <Footer />
+        <div className="flex gap-4">
+          <button>
+            <Avatar>R</Avatar>
+          </button>
+          <button className="shadow-lg bg-purple-600 p-2.5 text-white rounded-full  ">
+            Log out
+          </button>
+        </div>
+      </nav>
     </div>
   );
 }
