@@ -22,7 +22,7 @@ function ProfileMenu() {
         />
       </div>
       {openMenu ? (
-        <div className="absolute right-0 p-4 border border-gray-300 shadow-md bg-white rounded-xl mt-3 transition duration-300 ">
+        <div className="absolute z-10 right-0 p-4 border border-gray-300 shadow-md bg-white rounded-xl mt-3 transition duration-300 ">
           <div className="mt-2 hover:text-purple-500 flexStart  items-center gap-2">
             <User size={18} />
             <p>Profile</p>
