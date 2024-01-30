@@ -1,6 +1,5 @@
 import React from "react";
 import { User, LogOut } from "lucide-react";
-import avatarUrl from "../assets/user-photo.png";
 import { useState } from "react";
 
 function ProfileMenu() {
@@ -15,9 +14,8 @@ function ProfileMenu() {
         }}
       >
         <img
-          className="rounded-full"
-          width={45.33}
-          src={avatarUrl}
+          className="rounded-full w-[45.33px] h-[45.33px]"
+          src="https://i.pinimg.com/564x/4b/cc/54/4bcc54ebe6d0e6700e3df3047c1129c8.jpg"
           alt="profile image"
         />
       </div>
