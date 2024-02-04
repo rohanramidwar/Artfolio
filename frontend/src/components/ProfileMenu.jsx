@@ -1,36 +1,60 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { User, LogOut } from "lucide-react";
-import { useState } from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { Tooltip } from "@mui/material";
 
 function ProfileMenu() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className="relative cursor-pointer">
-      <div
-        role="button"
-        onClick={() => {
-          setOpenMenu(!openMenu);
+    <div>
+      <Tooltip title="Profile">
+        <Button
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+        >
+          <img
+            className="rounded-full w-[45.33px] h-[45.33px]"
+            src="https://i.pinimg.com/564x/4b/cc/54/4bcc54ebe6d0e6700e3df3047c1129c8.jpg"
+            alt="profile"
+          />
+        </Button>
+      </Tooltip>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
         }}
       >
-        <img
-          className="rounded-full w-[45.33px] h-[45.33px]"
-          src="https://i.pinimg.com/564x/4b/cc/54/4bcc54ebe6d0e6700e3df3047c1129c8.jpg"
-          alt="profile image"
-        />
-      </div>
-      {openMenu ? (
-        <div className="absolute z-10 right-0 p-4 border border-gray-300 shadow-md bg-white rounded-xl mt-3 transition duration-300 ">
-          <div className="mt-2 hover:text-purple-500 flexStart  items-center gap-2">
-            <User size={18} />
-            <p>Profile</p>
-          </div>
-          <div className="mt-2 pt-2 border-t border-gray-300 flexStart hover:text-purple-500  gap-2">
-            <LogOut size={18} />
-            <p>Signout</p>
-          </div>
-        </div>
-      ) : null}
+        <Link to="/profile">
+          <MenuItem onClick={handleClose} className="flex gap-2">
+            <User className="text-gray-700" size={16} />
+            <p className="text-gray-700 font-semibold font-['Karla']">
+              Profile
+            </p>
+          </MenuItem>
+        </Link>
+        <MenuItem onClick={handleClose} className="flex gap-2">
+          <LogOut className="text-gray-700" size={16} />
+          <p className="text-gray-700 font-semibold font-['Karla']">Sign out</p>
+        </MenuItem>
+      </Menu>
     </div>
   );
 }
