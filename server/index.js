@@ -13,7 +13,13 @@ const app = express();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-app.use(cors()); //enables cross origin req
+app.use(
+  cors({
+    origin: "http://localhost:5173/",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+); //enables cross origin req
 app.use(express.json());
 
 config(); //access to env
@@ -85,6 +91,14 @@ app.get(
     failureRedirect: "http://localhost:5173/auth",
   })
 );
+
+app.get("/login/success", async (req, res) => {
+  if (req.user) {
+    res.status(200).json({ user: req.user });
+  } else {
+    res.status(400).json({ message: "Not authorized" });
+  }
+});
 
 //connect database
 mongoose
