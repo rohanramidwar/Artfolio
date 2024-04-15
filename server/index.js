@@ -15,8 +15,8 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(
   cors({
-    origin: "http://localhost:5173/",
-    methods: "GET,POST,PUT,DELETE",
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 ); //enables cross origin req
