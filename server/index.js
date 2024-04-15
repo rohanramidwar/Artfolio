@@ -63,7 +63,7 @@ passport.use(
 
           await newUser.save();
           return done(null, newUser);
-        }
+        } else return done(null, existingUser);
       } catch (error) {
         return done(error, null);
       }
@@ -98,6 +98,15 @@ app.get("/login/success", async (req, res) => {
   } else {
     res.status(400).json({ message: "Not authorized" });
   }
+});
+
+app.get("/logout", (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("http://localhost:5173/");
+  });
 });
 
 //connect database

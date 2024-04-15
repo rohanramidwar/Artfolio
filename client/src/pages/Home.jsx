@@ -1,25 +1,34 @@
 import HomeLayout from "@/components/HomeLayout";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
-  const getUser = async () => {
+  const [userData, setUserData] = useState();
+  console.log("res", userData);
+
+  const fetchUserData = async () => {
     try {
       const res = await axios.get("http://localhost:5000/login/success", {
         withCredentials: true,
       });
-      console.log("res", res);
+      setUserData(res);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getUser();
+    fetchUserData();
   }, []);
+
+  const logOut = () => {
+    window.open("http://localhost:5000/logout", "_self");
+  };
 
   return (
     <div>
+      <Button onClick={logOut}>Log out</Button>
       <HomeLayout />
     </div>
   );
