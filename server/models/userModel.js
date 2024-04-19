@@ -6,9 +6,15 @@ const userSchema = new mongoose.Schema(
     displayName: String,
     email: String,
     profilePic: String,
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PostModel",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-const userDB = mongoose.model("users", userSchema);
-export default userDB;
+const UserModel = mongoose.model("UserModel", userSchema);
+export default UserModel;

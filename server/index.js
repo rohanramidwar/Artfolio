@@ -6,7 +6,8 @@ import { config } from "dotenv";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-google-oauth2";
-import userDB from "./models/userSchema.js";
+import UserModel from "./models/userModel.js";
+import routes from "./routes/routes.js";
 
 const app = express();
 //enable us to send post req
@@ -21,6 +22,8 @@ app.use(
   })
 ); //enables cross origin req
 app.use(express.json());
+
+app.use("/posts", routes);
 
 config(); //access to env
 const PORT = process.env.PORT || 5000;
@@ -51,10 +54,10 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const existingUser = await userDB.findOne({ googleId: profile.id });
+        const existingUser = await UserModel.findOne({ googleId: profile.id });
 
         if (!existingUser) {
-          const newUser = new userDB({
+          const newUser = new UserModel({
             googleId: profile.id,
             displayName: profile.displayName,
             email: profile.emails[0].value,
