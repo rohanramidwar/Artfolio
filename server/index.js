@@ -49,7 +49,7 @@ passport.use(
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
     },
-    async (profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await userDB.findOne({ googleId: profile.id });
 
