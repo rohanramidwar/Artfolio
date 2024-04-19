@@ -49,7 +49,7 @@ passport.use(
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (profile, done) => {
       try {
         const existingUser = await userDB.findOne({ googleId: profile.id });
 
@@ -65,6 +65,7 @@ passport.use(
           return done(null, newUser);
         } else return done(null, existingUser);
       } catch (error) {
+        console.log(error.message);
         return done(error, null);
       }
     }
@@ -118,7 +119,3 @@ mongoose
     })
   )
   .catch((err) => console.log(err));
-
-app.get("/", (req, res) => {
-  res.json("hello");
-});
