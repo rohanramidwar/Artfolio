@@ -16,6 +16,8 @@ export const getAllPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const { title, desc, creator } = req.body;
+
+  console.log(title, desc, creator);
   const newPost = new PostModel({
     title,
     desc,
@@ -24,11 +26,11 @@ export const createPost = async (req, res) => {
   try {
     await newPost.save();
 
-    const updatedUser = await UserModel.findByIdAndUpdate(
-      creator, //user id
-      { $push: { posts: newPost._id } },
-      { new: true }
-    );
+    // const updatedUser = await UserModel.findByIdAndUpdate(
+    //   creator, //user id
+    //   { $push: { posts: newPost._id } },
+    //   { new: true }
+    // );
 
     res.status(201).json(newPost);
   } catch (error) {
