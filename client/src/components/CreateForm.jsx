@@ -1,22 +1,20 @@
-import axios from "axios";
+import { createPost } from "@/actions/postActions";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
-  const [userData, setUserData] = useState();
-  console.log("res", userData);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [postData, setPostData] = useState({
     title: "",
     desc: "",
   });
 
-  const createPost = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/posts/", postData);
-      setUserData(res);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(postData, navigate));
   };
 
   const handleChange = (e) => {
@@ -25,7 +23,7 @@ const CreateForm = () => {
 
   return (
     <div>
-      <form onSubmit={createPost} className="flex flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-col">
         <input
           name="title"
           onChange={handleChange}

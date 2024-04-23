@@ -1,9 +1,7 @@
 import React from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 
-import profilePic from "../assets/profilePic.png";
-
-const Post = ({ title, desc }) => {
+const PostContainer = ({ title }) => {
   return (
     <div className="flex flex-col gap-2 w-full mb-5 break-inside-avoid">
       <Drawer>
@@ -14,11 +12,11 @@ const Post = ({ title, desc }) => {
       </Drawer>
       <p className="font-medium text-sm">{title}</p>
       <div className="cursor-pointer flex gap-2 items-center">
-        <img className="w-8 h-8" src={profilePic} alt="profile-pic" />
+        <img className="w-8 h-8" alt="profile-pic" />
         <p className="hover:underline text-sm">Artist</p>
       </div>
     </div>
   );
 };
 
-export default Post;
+export default PostContainer;

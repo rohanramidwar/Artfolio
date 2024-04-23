@@ -1,25 +1,19 @@
 import HomeLayout from "@/components/HomeLayout";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPosts } from "@/actions/postActions";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  console.log("res", posts);
+  const dispatch = useDispatch();
 
-  const fetchPosts = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/posts/");
-      setPosts(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  //fetch all posts
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    dispatch(getAllPosts());
+  }, [dispatch]);
+
+  const { posts } = useSelector((state) => state?.posts);
 
   const logOut = () => {
     window.open("http://localhost:5000/logout", "_self");
