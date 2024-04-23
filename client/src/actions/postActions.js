@@ -3,6 +3,7 @@ import {
   STARTLOADING,
   ENDLOADING,
   CREATEPOST,
+  FETCHPOST,
 } from "../constants/actionTypes";
 import * as api from "../api";
 
@@ -23,6 +24,17 @@ export const createPost = (newPost, navigate) => async (dispatch) => {
     const { data } = await api.createPost(newPost);
     dispatch({ type: CREATEPOST, payload: data });
     navigate("/");
+    dispatch({ type: ENDLOADING });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: STARTLOADING });
+    const { data } = await api.fetchPost(id); //single post
+    dispatch({ type: FETCHPOST, payload: data }); //sends to reducer
     dispatch({ type: ENDLOADING });
   } catch (err) {
     console.log(err);

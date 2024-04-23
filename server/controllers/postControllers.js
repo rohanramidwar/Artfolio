@@ -41,12 +41,8 @@ export const getPost = async (req, res) => {
   const { id } = req.params; //post id
 
   try {
-    const posts = await PostModel.findById(id)
-      .populate("upVotes")
-      .populate("downVotes")
-      .populate("comments")
-      .exec();
-    res.status(200).json(posts);
+    const post = await PostModel.findById(id).populate("creator").exec();
+    res.status(200).json(post);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

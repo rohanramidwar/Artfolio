@@ -6,12 +6,14 @@ import {
   CREATEPOST,
   ENDLOADING,
   FETCHALLPOSTS,
+  FETCHPOST,
   STARTLOADING,
 } from "../constants/actionTypes";
 
 const initialState = {
   posts: [],
   isLoading: true,
+  post: null,
 };
 
 const posts = (state = initialState, action) => {
@@ -29,6 +31,9 @@ const posts = (state = initialState, action) => {
         ...state,
         posts: payload,
       };
+
+    case FETCHPOST:
+      return { ...state, post: payload };
 
     case CREATEPOST:
       return { ...state, payload };
