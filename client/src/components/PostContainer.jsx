@@ -1,15 +1,22 @@
 import React from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import PostDetails from "./PostDetails";
 import { getPost } from "@/actions/postActions";
 
-const PostContainer = ({ title, id }) => {
+const PostContainer = ({ title, postId, creatorId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const openPost = () => {
-    dispatch(getPost(id));
+    dispatch(getPost(postId));
+  };
+
+  console.log(creatorId);
+
+  const viewProfile = () => {
+    navigate(`profile/${creatorId}`);
   };
 
   return (
@@ -25,7 +32,9 @@ const PostContainer = ({ title, id }) => {
       <p className="font-medium text-sm">{title}</p>
       <div className="cursor-pointer flex gap-2 items-center">
         <img className="w-8 h-8" alt="profile-pic" />
-        <p className="hover:underline text-sm">Artist</p>
+        <p onClick={viewProfile} className="hover:underline text-sm">
+          Artist
+        </p>
       </div>
     </div>
   );

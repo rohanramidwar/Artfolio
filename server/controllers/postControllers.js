@@ -1,4 +1,5 @@
 import PostModel from "../models/postModel.js";
+import UserModel from "../models/userModel.js";
 
 export const getAllPosts = async (req, res) => {
   try {
@@ -43,6 +44,17 @@ export const getPost = async (req, res) => {
   try {
     const post = await PostModel.findById(id).populate("creator").exec();
     res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getProfile = async (req, res) => {
+  const { id } = req.params; //artist id
+
+  try {
+    const data = await UserModel.findById(id);
+    res.status(200).json(data);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

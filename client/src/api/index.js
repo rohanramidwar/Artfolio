@@ -15,3 +15,4 @@ API.interceptors.request.use((req) => {
 export const fetchAllPosts = () => API.get("/posts");
 export const createPost = (newPost) => API.post("/posts", newPost); //sends data
 export const fetchPost = (id) => API.get(`/posts/${id}`); //post id
+export const fetchProfile = (id) => API.get(`/posts/profile/${id}`);

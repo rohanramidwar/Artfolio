@@ -8,12 +8,14 @@ import {
   FETCHALLPOSTS,
   FETCHPOST,
   STARTLOADING,
+  FETCHARTIST,
 } from "../constants/actionTypes";
 
 const initialState = {
   posts: [],
   isLoading: true,
   post: null,
+  artist: null,
 };
 
 const posts = (state = initialState, action) => {
@@ -34,6 +36,9 @@ const posts = (state = initialState, action) => {
 
     case FETCHPOST:
       return { ...state, post: payload };
+
+    case FETCHARTIST:
+      return { ...state, posts: [], artist: payload };
 
     case CREATEPOST:
       return { ...state, payload };
