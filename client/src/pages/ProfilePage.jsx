@@ -7,16 +7,19 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams(); //artist id
-  console.log(id);
 
   useEffect(() => {
     dispatch(getProfile(id));
   }, [dispatch, id]);
 
   const { artist } = useSelector((state) => state?.posts);
-  console.log("artist", artist);
 
-  return <div>ProfilePage</div>;
+  return (
+    <div>
+      ProfilePage
+      {artist.displayName}
+    </div>
+  );
 };
 
 export default ProfilePage;

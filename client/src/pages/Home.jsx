@@ -1,12 +1,28 @@
 import HomeLayout from "@/components/HomeLayout";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "@/actions/postActions";
+import axios from "axios";
 
 const Home = () => {
   const dispatch = useDispatch();
+
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/login/success", {
+        withCredentials: true,
+      });
+      localStorage.setItem("profile", JSON.stringify({ ...res.data.user }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   //fetch all posts
   useEffect(() => {
@@ -17,6 +33,7 @@ const Home = () => {
 
   const logOut = () => {
     window.open("http://localhost:5000/logout", "_self");
+    localStorage.clear();
   };
 
   return (
