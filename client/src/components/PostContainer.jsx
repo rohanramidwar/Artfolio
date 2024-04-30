@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PostDetails from "./PostDetails";
 import { getPost } from "@/actions/postActions";
 
-const PostContainer = ({ title, postId, creatorId }) => {
+const PostContainer = ({ title, postId, creatorId, artImg }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,7 +23,12 @@ const PostContainer = ({ title, postId, creatorId }) => {
     <div className="flex flex-col gap-2 w-full mb-5 break-inside-avoid">
       <Drawer>
         <DrawerTrigger>
-          <img onClick={openPost} className="max-w-full rounded-xl" alt="art" />
+          <img
+            onClick={openPost}
+            src={artImg}
+            className="max-w-full rounded-xl"
+            alt="art"
+          />
         </DrawerTrigger>
         <DrawerContent className="h-[91%]">
           <PostDetails />{" "}

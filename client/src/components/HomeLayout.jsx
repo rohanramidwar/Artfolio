@@ -10,6 +10,7 @@ const HomeLayout = ({ posts }) => {
           postId={post?._id}
           title={post?.title}
           creatorId={post?.creator?._id}
+          artImg={post?.artImg}
         />
       ))}
     </div>

@@ -15,13 +15,14 @@ export const getAllPosts = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-  const { title, desc, creator } = req.body;
+  const { title, desc, creator, artImg } = req.body;
 
   console.log(title, desc, creator);
   const newPost = new PostModel({
     title,
     desc,
     creator,
+    artImg,
   });
   try {
     await newPost.save();

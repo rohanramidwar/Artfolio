@@ -8,8 +8,10 @@ const CreateForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [image, setImage] = useState();
+
+  //to get user id
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  console.log("user", user);
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
@@ -18,11 +20,31 @@ const CreateForm = () => {
     title: "",
     desc: "",
     creator: user?._id,
+    artImg: "",
   });
 
   const handleSubmit = (e) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "zngtpman");
+    data.append("cloud_name", "dxykak5rw");
+
+    fetch("https://api.cloudinary.com/v1_1/dxykak5rw/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPostData({ ...postData, artImg: data.url });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     e.preventDefault();
-    dispatch(createPost(postData, navigate));
+
+    if (postData.artImg) dispatch(createPost(postData, navigate));
+    else console.log("img missing");
   };
 
   const handleChange = (e) => {
@@ -44,7 +66,7 @@ const CreateForm = () => {
           value={postData.desc}
           placeholder="Desc"
         />
-        <input type="file" />
+        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
         <button type="submit">Post</button>
       </form>
     </div>

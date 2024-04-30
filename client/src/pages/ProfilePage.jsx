@@ -17,7 +17,7 @@ const ProfilePage = () => {
   return (
     <div>
       ProfilePage
-      {artist.displayName}
+      {artist?.displayName}
     </div>
   );
 };
