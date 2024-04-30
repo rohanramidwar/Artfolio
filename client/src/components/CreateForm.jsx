@@ -1,15 +1,23 @@
 import { createPost } from "@/actions/postActions";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  console.log("user", user);
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   const [postData, setPostData] = useState({
     title: "",
     desc: "",
+    creator: user?._id,
   });
 
   const handleSubmit = (e) => {
