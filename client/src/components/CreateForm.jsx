@@ -8,7 +8,7 @@ const CreateForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [image, setImage] = useState();
+  // const [image, setImage] = useState();
 
   //to get user id
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -24,8 +24,20 @@ const CreateForm = () => {
   });
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    if (postData.artImg) dispatch(createPost(postData, navigate));
+    else console.log("img missing");
+  };
+
+  const handleChange = (e) => {
+    setPostData({ ...postData, [e.target.name]: e.target.value });
+  };
+
+  const handleImgUpload = (e) => {
+    // setImage();
+
     const data = new FormData();
-    data.append("file", image);
+    data.append("file", e.target.files[0]);
     data.append("upload_preset", "zngtpman");
     data.append("cloud_name", "dxykak5rw");
 
@@ -40,15 +52,6 @@ const CreateForm = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    e.preventDefault();
-
-    if (postData.artImg) dispatch(createPost(postData, navigate));
-    else console.log("img missing");
-  };
-
-  const handleChange = (e) => {
-    setPostData({ ...postData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -66,7 +69,7 @@ const CreateForm = () => {
           value={postData.desc}
           placeholder="Desc"
         />
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+        <input type="file" onChange={handleImgUpload} />
         <button type="submit">Post</button>
       </form>
     </div>
