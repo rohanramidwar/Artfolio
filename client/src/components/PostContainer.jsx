@@ -28,6 +28,7 @@ const PostContainer = ({ title, postId, creatorId, artImg }) => {
             src={artImg}
             className="max-w-full rounded-xl"
             alt="art"
+            loading="lazy"
           />
         </DrawerTrigger>
         <DrawerContent className="h-[91%]">

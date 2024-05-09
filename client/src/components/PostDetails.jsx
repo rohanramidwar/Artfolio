@@ -9,6 +9,7 @@ const PostDetails = () => {
     <div>
       PostDetails
       <p className="font-medium text-sm">{post?.title}</p>
+      <img src={post?.artImg} />
     </div>
   );
 };
