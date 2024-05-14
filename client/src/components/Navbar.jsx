@@ -11,10 +11,10 @@ const Navbar = () => {
         <Button className="rounded-full font-semibold h-12">Create</Button>
       </div>
 
-      <div className="mx-7 relative w-4/5">
+      <div className="relative w-3/4">
         <Search className="absolute top-3 left-6 text-gray-400" size={20} />
         <input
-          className="bg-gray-100 w-full rounded-full h-12 pl-12 pr-6 outline-none placeholder:text-gray-400"
+          className="bg-zinc-200 w-full rounded-full h-12 pl-12 pr-6 outline-none placeholder:text-gray-400"
           placeholder="Search..."
         />
       </div>

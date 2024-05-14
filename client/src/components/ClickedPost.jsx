@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Heart, SendHorizontal } from "lucide-react";
+import { Heart, X } from "lucide-react";
 
 const ClickedPost = () => {
   const [fullSc, setFullSc] = useState(false);
 
   return (
-    <div className="flex overflow-auto">
+    <div className="flex overflow-auto justify-between text-gray-800 ">
       {/* left */}
       <div
-        className={`flex flex-col gap-7 px-10 text-gray-800 transition-all ${
+        className={`flex flex-col gap-7 px-10 transition-all ${
           fullSc ? "w-full" : "w-2/3"
         }`}
       >
-        <h1 className="mt-5 text-2xl font-semibold">Aeroplane painting</h1>
+        <h1 className="mt-10 text-2xl font-semibold">Aeroplane painting</h1>
 
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
@@ -43,7 +43,7 @@ const ClickedPost = () => {
           src="https://i.pinimg.com/564x/25/0c/0b/250c0b956e33c96c151d7535b03061a8.jpg"
           alt="artwork"
         />
-        <p className="px-5 text-xl">
+        <p className="pb-14 px-5 text-xl">
           Robert Breedlove is a freedom maximalist, ex-hedge fund manager, a
           philosopher and influencer in the Bitcoin space. To him, Bitcoin is
           fundamentally a humanitarian movement exposing the greatest con in
@@ -58,19 +58,29 @@ const ClickedPost = () => {
 
       {/* right */}
 
-      <div className="px-10">
-        <h2 className="text-xl">Feedback</h2>
+      <div
+        className={`fixed ${
+          fullSc ? "hidden" : "block"
+        } border-l min-h-full end-0 flex flex-col gap-7 px-10 w-1/3`}
+      >
+        <button
+          onClick={() => setFullSc(!fullSc)}
+          className="absolute bg-white top-10 -left-4 w-8 h-8 rounded-full border-2 flex items-center justify-center"
+        >
+          <X size={16} />
+        </button>
+        {/* <h2 className="text-xl font-semibold">Feedback</h2> */}
 
         {/* input */}
-        <div>
-          <input className="rounded-xl border" />
-          <button>
-            <SendHorizontal />
-          </button>
-        </div>
+        {/* <div className="relative w-full">
+          <textarea
+            placeholder="Any suggestions?"
+            className="rounded-lg border text-lg p-2 outline-none w-full"
+          />
+        </div> */}
 
         {/* feedbacks  */}
-        <div className="flex flex-col gap-7">
+        {/* <div className="flex flex-col gap-7">
           <div className="flex gap-2">
             <img
               className="w-10 h-10 rounded-full"
@@ -93,7 +103,7 @@ const ClickedPost = () => {
               <p>Good!</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
