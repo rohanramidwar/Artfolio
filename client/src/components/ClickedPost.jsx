@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Heart, X } from "lucide-react";
+import { Bookmark, Heart, Save, SendHorizonal, X } from "lucide-react";
 
 const ClickedPost = () => {
   const [fullSc, setFullSc] = useState(false);
@@ -28,6 +28,9 @@ const ClickedPost = () => {
           <div className="flex items-center gap-3">
             <button className="border-2 rounded-full h-10 w-10 flex items-center justify-center">
               <Heart size={16} />
+            </button>
+            <button className="border-2 rounded-full h-10 w-10 flex items-center justify-center">
+              <Bookmark size={16} />
             </button>
             <Button
               onClick={() => setFullSc(!fullSc)}
@@ -69,41 +72,56 @@ const ClickedPost = () => {
         >
           <X size={16} />
         </button>
-        {/* <h2 className="text-xl font-semibold">Feedback</h2> */}
 
-        {/* input */}
-        {/* <div className="relative w-full">
-          <textarea
-            placeholder="Any suggestions?"
-            className="rounded-lg border text-lg p-2 outline-none w-full"
-          />
-        </div> */}
+        {/* feedback  */}
+        <div className="flex flex-col gap-7 justify-center">
+          <div className="mt-9 flex items-center gap-3">
+            <button className="border-2 rounded-full h-10 w-10 flex items-center justify-center">
+              <Heart size={16} />
+            </button>
+            <button className="border-2 rounded-full h-10 w-10 flex items-center justify-center">
+              <Bookmark size={16} />
+            </button>
+          </div>
 
-        {/* feedbacks  */}
-        {/* <div className="flex flex-col gap-7">
-          <div className="flex gap-2">
-            <img
-              className="w-10 h-10 rounded-full"
-              src="https://i.pinimg.com/280x280_RS/dd/73/58/dd73584f718d8fa359c5b8972baa7434.jpg"
-              alt="artist"
-            />
-            <div>
-              <p className="font-semibold">Emma</p>
-              <p>Good!</p>
+          {/* input  */}
+          <div>
+            <h2 className="mb-3 text-xl font-medium">Feedback</h2>
+            <div className="relative w-full">
+              <textarea className="w-full p-3 border outline-none rounded-xl" />
+              <button className="bg-purple-500 hover:bg-purple-600 text-slate-100 p-2 rounded-full absolute right-2 bottom-4 text-xs font-semibold">
+                Comment
+              </button>
             </div>
           </div>
-          <div className="flex gap-2">
-            <img
-              className="w-10 h-10 rounded-full"
-              src="https://i.pinimg.com/280x280_RS/dd/73/58/dd73584f718d8fa359c5b8972baa7434.jpg"
-              alt="artist"
-            />
-            <div>
-              <p className="font-semibold">Emma</p>
-              <p>Good!</p>
+
+          {/* feedbacks  */}
+          <div className="flex flex-col gap-5">
+            <div className="flex gap-2">
+              <img
+                className="w-8 h-8 rounded-full"
+                src="https://i.pinimg.com/280x280_RS/dd/73/58/dd73584f718d8fa359c5b8972baa7434.jpg"
+                alt="artist"
+              />
+              <div>
+                <p className="font-medium">Emma</p>
+                <p>GOOD!</p>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <img
+                className="w-8 h-8 rounded-full"
+                src="https://i.pinimg.com/280x280_RS/dd/73/58/dd73584f718d8fa359c5b8972baa7434.jpg"
+                alt="artist"
+              />
+              <div>
+                <p className="font-medium">Emma</p>
+                <p>GOOD!</p>
+              </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
