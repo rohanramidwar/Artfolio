@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Bookmark, Heart, Save, SendHorizonal, X } from "lucide-react";
+import { Bookmark, Heart, MessageCircle, X } from "lucide-react";
 
 const ClickedPost = () => {
   const [fullSc, setFullSc] = useState(false);
@@ -10,19 +10,19 @@ const ClickedPost = () => {
       {/* left */}
       <div
         className={`flex flex-col gap-7 px-10 transition-all ${
-          fullSc ? "w-full" : "w-2/3"
+          fullSc ? "pl-20 w-full" : "w-2/3"
         }`}
       >
         <h1 className="mt-10 text-2xl font-semibold">Aeroplane painting</h1>
 
         <div className="flex justify-between items-center">
-          <div className="flex gap-2 items-center">
+          <div role="button" className="flex gap-2 items-center">
             <img
               className="w-10 h-10 rounded-full"
               src="https://i.pinimg.com/280x280_RS/dd/73/58/dd73584f718d8fa359c5b8972baa7434.jpg"
               alt="artist"
             />
-            <p>Emma</p>
+            <p className="font-medium hover:underline">Emma</p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -32,12 +32,7 @@ const ClickedPost = () => {
             <button className="border-2 rounded-full h-10 w-10 flex items-center justify-center">
               <Bookmark size={16} />
             </button>
-            <Button
-              onClick={() => setFullSc(!fullSc)}
-              className="rounded-full font-semibold"
-            >
-              Get in Touch
-            </Button>
+            <Button className="rounded-full font-semibold">Get in Touch</Button>
           </div>
         </div>
 
@@ -59,12 +54,23 @@ const ClickedPost = () => {
         </p>
       </div>
 
+      {fullSc && (
+        <div className="pr-10 flex flex-col justify-center gap-3">
+          <button
+            onClick={() => setFullSc(!fullSc)}
+            className="border-2 rounded-full h-10 w-10 flex items-center justify-center"
+          >
+            <MessageCircle size={16} />
+          </button>
+        </div>
+      )}
+
       {/* right */}
 
       <div
         className={`fixed ${
           fullSc ? "hidden" : "block"
-        } border-l min-h-full end-0 flex flex-col gap-7 px-10 w-1/3`}
+        } border-l min-h-full end-0 flex flex-col gap-7 px-10 transition-all w-1/3`}
       >
         <button
           onClick={() => setFullSc(!fullSc)}
@@ -88,7 +94,7 @@ const ClickedPost = () => {
           <div>
             <h2 className="mb-3 text-xl font-medium">Feedback</h2>
             <div className="relative w-full">
-              <textarea className="w-full p-3 border outline-none rounded-xl" />
+              <textarea className="focus:border-zinc-500 w-full p-3 border outline-none rounded-xl" />
               <button className="bg-purple-500 hover:bg-purple-600 text-slate-100 p-2 rounded-full absolute right-2 bottom-4 text-xs font-semibold">
                 Comment
               </button>
