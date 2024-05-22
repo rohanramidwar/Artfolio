@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Bookmark, Heart, MessageCircle, X } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const ClickedPost = () => {
+  const { post } = useSelector((state) => state?.posts);
+
   const [fullSc, setFullSc] = useState(false);
 
   return (
@@ -13,16 +16,16 @@ const ClickedPost = () => {
           fullSc ? "pl-20 w-full" : "w-2/3"
         }`}
       >
-        <h1 className="mt-10 text-2xl font-semibold">Aeroplane painting</h1>
+        <h1 className="mt-10 text-2xl font-semibold">{post?.title}</h1>
 
         <div className="flex justify-between items-center">
           <div role="button" className="flex gap-2 items-center">
             <img
               className="w-10 h-10 rounded-full"
-              src="https://i.pinimg.com/280x280_RS/dd/73/58/dd73584f718d8fa359c5b8972baa7434.jpg"
+              src={post?.creator?.profilePic}
               alt="artist"
             />
-            <p className="font-medium hover:underline">Emma</p>
+            <p className="hover:underline">{post?.creator?.displayName}</p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -36,22 +39,8 @@ const ClickedPost = () => {
           </div>
         </div>
 
-        <img
-          className="rounded-lg w-full"
-          src="https://i.pinimg.com/564x/25/0c/0b/250c0b956e33c96c151d7535b03061a8.jpg"
-          alt="artwork"
-        />
-        <p className="pb-14 px-5 text-xl">
-          Robert Breedlove is a freedom maximalist, ex-hedge fund manager, a
-          philosopher and influencer in the Bitcoin space. To him, Bitcoin is
-          fundamentally a humanitarian movement exposing the greatest con in
-          human history: central banking. As Robert was becoming recognized as
-          one of the most influential Bitcoin thinkers of our time, he was
-          looking to level up his personal brand accordingly. He didn’t have a
-          personal website and wanted to create one that not only presented him
-          to the world, but also showcased his personal philosophy, top
-          podcasts, reading, and writing.
-        </p>
+        <img className="rounded-lg w-full" src={post?.artImg} alt="artwork" />
+        <p className="pb-14 px-5 text-xl">{post?.desc}</p>
       </div>
 
       {fullSc && (
@@ -94,7 +83,10 @@ const ClickedPost = () => {
           <div>
             <h2 className="mb-3 text-xl font-medium">Feedback</h2>
             <div className="relative w-full">
-              <textarea className="focus:border-zinc-500 w-full p-3 border outline-none rounded-xl" />
+              <textarea
+                className="focus:border-purple-300 w-full px-3 py-4 border-2 outline-none rounded-xl"
+                placeholder="Any suggestions?"
+              />
               <button className="bg-purple-500 hover:bg-purple-600 text-slate-100 p-2 rounded-full absolute right-2 bottom-4 text-xs font-semibold">
                 Comment
               </button>
