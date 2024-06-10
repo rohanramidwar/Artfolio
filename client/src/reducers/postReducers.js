@@ -3,19 +3,16 @@
 //then based on the action type do some logic
 //state cannot be empty -> therefore, empty arr
 import {
-  CREATEPOST,
+  STARTLOADING,
   ENDLOADING,
   FETCHALLPOSTS,
-  FETCHPOST,
-  STARTLOADING,
-  FETCHARTIST,
+  CREATEPOST,
+  FETCHFILTEREDPOSTS,
 } from "../constants/actionTypes";
 
 const initialState = {
   posts: [],
   isLoading: true,
-  post: null,
-  artist: null,
 };
 
 const posts = (state = initialState, action) => {
@@ -28,20 +25,17 @@ const posts = (state = initialState, action) => {
     case ENDLOADING:
       return { ...state, isLoading: false };
 
+    case CREATEPOST:
+      return { ...state, payload };
+
     case FETCHALLPOSTS:
       return {
         ...state,
         posts: payload,
       };
 
-    case FETCHPOST:
-      return { ...state, post: payload };
-
-    case FETCHARTIST:
-      return { ...state, posts: [], artist: payload };
-
-    case CREATEPOST:
-      return { ...state, payload };
+    case FETCHFILTEREDPOSTS:
+      return { ...state, posts: payload };
 
     default:
       return state;

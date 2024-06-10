@@ -1,4 +1,5 @@
 import PostModel from "../models/postModel.js";
+import UserModel from "../models/userModel.js";
 
 export const deletePost = async (req, res) => {
   const { postId } = req.params;
@@ -67,6 +68,11 @@ export const createPost = async (req, res) => {
   });
   try {
     await newPost.save();
+    await UserModel.findByIdAndUpdate(
+      creator, //user id
+      { $push: { posts: newPost._id } },
+      { new: true }
+    );
     res.status(201).json(newPost);
   } catch (error) {
     res.status(409).json({ message: error.message });
