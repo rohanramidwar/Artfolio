@@ -1,5 +1,15 @@
 import PostModel from "../models/postModel.js";
 
+export const deletePost = async (req, res) => {
+  const { postId } = req.params;
+  try {
+    await PostModel.findByIdAndDelete(postId);
+    res.status(201).json("Post deleted");
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 export const editPost = async (req, res) => {
   const { postId, artImg, title, desc, category } = req.body;
   try {
