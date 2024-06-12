@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { useDispatch } from "react-redux";
-import { getFilteredPosts } from "@/actions/postActions";
+import { getAllPosts, getFilteredPosts } from "@/actions/postActions";
 
 const HomeFilters = () => {
   const dispatch = useDispatch();
 
   const filters = [
+    "Discover",
     "Sketches",
     "Watercolor",
     "Pixel",
@@ -27,7 +28,11 @@ const HomeFilters = () => {
   //final call
   const handleClick = (e) => {
     setCategory(e.target.innerHTML);
-    dispatch(getFilteredPosts(e.target.innerHTML));
+    if (e.target.innerHTML === "Discover") {
+      dispatch(getAllPosts());
+    } else {
+      dispatch(getFilteredPosts(e.target.innerHTML));
+    }
   };
 
   return (
