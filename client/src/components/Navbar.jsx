@@ -20,7 +20,6 @@ import {
   getCreatorProfile,
   getPostsBySearch,
 } from "@/actions/postActions";
-import { Search } from "lucide-react";
 import axios from "axios";
 
 function useQuery() {
@@ -64,14 +63,14 @@ const Navbar = () => {
   const creatorId = user?._id;
 
   const handleSignOut = () => {
-    window.open("http://localhost:5000/logout", "_self");
+    window.open("https://artfolio-backend-blond.vercel.app/logout", "_self");
     localStorage.clear();
   };
 
   //store user data in local storage
   const fetchUserData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/login/success", {
+      const res = await axios.get("https://artfolio-backend-blond.vercel.app/login/success", {
         withCredentials: true,
       });
       setUser({ ...res.data.user });
@@ -85,7 +84,7 @@ const Navbar = () => {
   }, []);
 
   const handleSignIn = () => {
-    window.open("http://localhost:5000/auth/google/callback", "_self");
+    window.open("https://artfolio-backend-blond.vercel.app/auth/google/callback", "_self");
   };
 
   const handleCreatorProfile = () => {
