@@ -1,7 +1,7 @@
 import axios from "axios"; //used to make api calls
 
 axios.defaults.withCredentials = true;
-const API = axios.create({ baseURL: "https://artfolio-backend-blond.vercel.app" }); //points to backend routes
+const API = axios.create({ baseURL: "http://artfolio-backend-blond.vercel.app" }); //points to backend routes
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
