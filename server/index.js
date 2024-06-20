@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(
   cors({
-    origin: "https://artfolio-beta.vercel.app",
+    origin: "http://artfolio-beta.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -110,7 +110,7 @@ app.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("https://artfolio-beta.vercel.app/");
+    res.redirect("http://artfolio-beta.vercel.app/");
   });
 });
 
