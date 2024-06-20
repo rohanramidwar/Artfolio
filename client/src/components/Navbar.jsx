@@ -63,14 +63,14 @@ const Navbar = () => {
   const creatorId = user?._id;
 
   const handleSignOut = () => {
-    window.open("https://artfolio-backend-blond.vercel.app/logout", "_self");
+    window.open("http://artfolio-backend-blond.vercel.app/logout", "_self");
     localStorage.clear();
   };
 
   //store user data in local storage
   const fetchUserData = async () => {
     try {
-      const res = await axios.get("https://artfolio-backend-blond.vercel.app/login/success", {
+      const res = await axios.get("http://artfolio-backend-blond.vercel.app/login/success", {
         withCredentials: true,
       });
       setUser({ ...res.data.user });
@@ -84,7 +84,7 @@ const Navbar = () => {
   }, []);
 
   const handleSignIn = () => {
-    window.open("https://artfolio-backend-blond.vercel.app/auth/google/callback", "_self");
+    window.open("http://artfolio-backend-blond.vercel.app/auth/google/callback", "_self");
   };
 
   const handleCreatorProfile = () => {
