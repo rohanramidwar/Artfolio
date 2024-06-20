@@ -92,8 +92,8 @@ app.get(
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "https://artfolio-beta.vercel.app/",
-    failureRedirect: "https://artfolio-beta.vercel.app/",
+    successRedirect: "http://artfolio-beta.vercel.app/",
+    failureRedirect: "http://artfolio-beta.vercel.app/",
   })
 );
 
