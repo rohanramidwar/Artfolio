@@ -6,15 +6,10 @@ const postSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "UserModel",
     },
+    artImg: String,
     title: String,
     desc: String,
-    artImg: String,
-    comments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "CommentModel",
-      },
-    ],
+    category: String,
   },
   { timestamps: true }
 );
