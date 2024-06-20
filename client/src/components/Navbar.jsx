@@ -76,6 +76,7 @@ const Navbar = () => {
           withCredentials: true,
         }
       );
+      console.log("res", res);
       setUser({ ...res.data.user });
       localStorage.setItem("profile", JSON.stringify({ ...res.data.user }));
     } catch (error) {
