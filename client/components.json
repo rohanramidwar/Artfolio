@@ -5,7 +5,7 @@
   "tsx": false,
   "tailwind": {
     "config": "tailwind.config.js",
-    "css": "src/index.css",
+    "css": "'c:/Users/rohan/OneDrive/Desktop/Artfolio/client/src/index.css'",
     "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""

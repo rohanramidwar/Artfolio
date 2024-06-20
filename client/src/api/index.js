@@ -12,7 +12,13 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchAllPosts = () => API.get("/posts");
+export const deletePost = (postId) =>
+  API.delete(`/posts/delete-post/${postId}`);
+export const editPost = (newData) => API.put("/posts/edit-post", newData);
 export const createPost = (newPost) => API.post("/posts", newPost); //sends data
-export const fetchPost = (id) => API.get(`/posts/${id}`); //post id
-export const fetchProfile = (id) => API.get(`/posts/profile/${id}`);
+export const fetchAllPosts = () => API.get("/posts");
+export const fetchPostsBySearch = (searchQuery) =>
+  API.get(`/posts/search?searchQuery=${searchQuery || none}`);
+export const fetchFilteredPosts = (category) => API.get(`/posts/${category}`);
+export const fetchCreatorProfile = (creatorId) =>
+  API.get(`/posts/creator/${creatorId}`);

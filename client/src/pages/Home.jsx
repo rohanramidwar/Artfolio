@@ -1,51 +1,37 @@
-import HomeLayout from "@/components/HomeLayout";
-import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "@/actions/postActions";
-import axios from "axios";
+import HomeFilters from "@/components/HomeFilters";
+import ProjectCard from "@/components/ProjectCard";
+import { LoaderCircle } from "lucide-react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
-
-  const fetchUserData = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/login/success", {
-        withCredentials: true,
-      });
-      localStorage.setItem("profile", JSON.stringify({ ...res.data.user }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   //fetch all posts
   useEffect(() => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
-  const { posts } = useSelector((state) => state?.posts);
-
-  const logOut = () => {
-    window.open("http://localhost:5000/logout", "_self");
-    localStorage.clear();
-  };
+  const { posts, isLoading } = useSelector((state) => state?.posts);
 
   return (
-    <div>
-      <Button onClick={logOut}>Log out</Button>
-      <Link to="/create">
-        <Button>Create</Button>
-      </Link>
-      <Link to="/auth">
-        <Button>Sign in</Button>
-      </Link>
-      <HomeLayout posts={posts} />
+    <div className="px-8 sm:px-14">
+      <HomeFilters />
+      {isLoading ? (
+        <div className="flex justify-center items-center py-12">
+          <LoaderCircle className="animate-spin text-violet-500" />
+        </div>
+      ) : (
+        <>
+          {!posts?.length && <p className="pt-12 text-center">0 posts found</p>}
+          <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {posts?.map((post, index) => (
+              <ProjectCard key={post?._id} post={post} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

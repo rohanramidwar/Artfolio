@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { LoaderCircle, Plus } from "lucide-react";
 import {
@@ -9,16 +9,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { editPost } from "@/actions/postActions";
+import { useLocation, useNavigate } from "react-router-dom";
+import { createPost } from "@/actions/postActions";
 
-const EditProject = ({ post }) => {
+const CreateProject = ({ onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const inputRef = useRef(null);
-
-  const { isLoading } = useSelector((state) => state?.posts);
 
   const categories = [
     "Sketches",
@@ -36,13 +35,21 @@ const EditProject = ({ post }) => {
     "Simple",
   ];
 
+  const { isLoading } = useSelector((state) => state?.posts);
+
+  //to get user id
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
   //data
   const [postData, setPostData] = useState({
-    postId: post?._id,
-    artImg: post?.artImg,
-    title: post?.title,
-    desc: post?.desc,
-    category: post?.category,
+    creator: user?._id,
+    artImg: "",
+    title: "",
+    desc: "",
+    category: "",
   });
 
   function handleImageUpload(e) {
@@ -71,13 +78,16 @@ const EditProject = ({ post }) => {
   //final call
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editPost(postData, navigate));
+    dispatch(createPost(postData, navigate));
+    if (!isLoading) {
+      onClose();
+    }
   };
 
   return (
     <div className="pt-9 flex justify-center overflow-auto text-slate-900">
       <div className="w-3/4 flex flex-col gap-24">
-        <h1 className="text-5xl font-extrabold">Edit post</h1>
+        <h1 className="text-5xl font-extrabold">Create a new Post</h1>
         <form
           onSubmit={handleSubmit}
           className="text-lg flex flex-col gap-11 pb-72"
@@ -97,6 +107,7 @@ const EditProject = ({ post }) => {
             type="file"
             onChange={handleImageUpload}
             ref={inputRef}
+            required
           />
           <label className="flex flex-col gap-5">
             Title
@@ -126,15 +137,14 @@ const EditProject = ({ post }) => {
               onValueChange={(value) =>
                 setPostData({ ...postData, category: value })
               }
+              required
             >
               <SelectTrigger className="sm:w-fit w-full text-base p-4 h-auto bg-gray-100 rounded-xl border-none">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map((category, index) => (
-                  <SelectItem key={index} value={category}>
-                    {category}
-                  </SelectItem>
+                {categories.map((category) => (
+                  <SelectItem value={category}>{category}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -144,12 +154,12 @@ const EditProject = ({ post }) => {
             {isLoading ? (
               <Button className="sm:w-auto w-full h-auto py-3 flex items-center gap-3 bg-violet-500 hover:bg-violet-500 rounded-xl">
                 <LoaderCircle className="animate-spin" size={16} />
-                Editing..
+                Creating..
               </Button>
             ) : (
               <Button className="sm:w-auto w-full h-auto py-3 flex items-center gap-3 bg-violet-500 hover:bg-violet-500 rounded-xl">
                 <Plus size={16} />
-                Edit
+                Create
               </Button>
             )}
           </div>
@@ -159,4 +169,4 @@ const EditProject = ({ post }) => {
   );
 };
 
-export default EditProject;
+export default CreateProject;

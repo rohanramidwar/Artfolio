@@ -8,11 +8,16 @@ import {
   FETCHALLPOSTS,
   CREATEPOST,
   FETCHFILTEREDPOSTS,
+  UPDATEPOSTS,
+  REMOVEDELETEDPOST,
+  FETCHCREATORPROFILE,
+  FETCHPOSTSBYSEARCH,
 } from "../constants/actionTypes";
 
 const initialState = {
   posts: [],
-  isLoading: true,
+  creator: null,
+  isLoading: false,
 };
 
 const posts = (state = initialState, action) => {
@@ -26,7 +31,7 @@ const posts = (state = initialState, action) => {
       return { ...state, isLoading: false };
 
     case CREATEPOST:
-      return { ...state, payload };
+      return { ...state, posts: [payload, ...state.posts] };
 
     case FETCHALLPOSTS:
       return {
@@ -34,8 +39,31 @@ const posts = (state = initialState, action) => {
         posts: payload,
       };
 
+    case FETCHPOSTSBYSEARCH:
+      return {
+        ...state,
+        posts: payload,
+      };
+
+    case UPDATEPOSTS:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === payload._id ? payload : post
+        ),
+      };
+
+    case REMOVEDELETEDPOST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== payload),
+      };
+
     case FETCHFILTEREDPOSTS:
       return { ...state, posts: payload };
+
+    case FETCHCREATORPROFILE:
+      return { ...state, creator: payload };
 
     default:
       return state;
