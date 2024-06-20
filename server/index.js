@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://artfolio-beta.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -92,8 +92,8 @@ app.get(
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/",
-    failureRedirect: "http://localhost:5173/auth",
+    successRedirect: "https://artfolio-beta.vercel.app/",
+    failureRedirect: "https://artfolio-beta.vercel.app/auth",
   })
 );
 
@@ -110,7 +110,7 @@ app.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("http://localhost:5173/");
+    res.redirect("https://artfolio-beta.vercel.app/");
   });
 });
 
