@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { config } from "dotenv";
 import session from "express-session";
-import passport from "passport";
+import passport, { authorize } from "passport";
 import { Strategy as OAuth2Strategy } from "passport-google-oauth2";
 import UserModel from "./models/userModel.js";
 import PostRoutes from "./routes/postRoutes.js";
@@ -37,6 +37,10 @@ app.use(
     secret: "12872kqkga2813b",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      secure: true, // set true if using https
+      sameSite: "lax", // set sameSite policy
+    },
   })
 );
 
@@ -101,7 +105,7 @@ app.get("/login/success", async (req, res) => {
   if (req.user) {
     res.status(200).json({ user: req.user });
   } else {
-    res.status(400).json({ message: "Not authorized" });
+    res.status(400).json({ message: "Not Authorized" });
   }
 });
 
