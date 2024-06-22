@@ -16,7 +16,7 @@ const Home = () => {
   const { posts, isLoading } = useSelector((state) => state?.posts);
 
   return (
-    <div className="px-8 sm:px-14">
+    <div className="px-5 sm:px-14">
       <HomeFilters />
       {isLoading ? (
         <div className="flex justify-center items-center py-12">
