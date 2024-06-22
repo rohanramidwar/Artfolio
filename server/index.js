@@ -101,7 +101,7 @@ app.get("/login/success", async (req, res) => {
   if (req.user) {
     res.status(200).json({ user: req.user });
   } else {
-    res.status(400).json({ message: "Not authorized" });
+    res.status(400).json({ res });
   }
 });
 
