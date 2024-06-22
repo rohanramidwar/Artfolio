@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { config } from "dotenv";
 import session from "express-session";
-import passport, { authorize } from "passport";
+import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-google-oauth2";
 import UserModel from "./models/userModel.js";
 import PostRoutes from "./routes/postRoutes.js";
