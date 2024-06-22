@@ -23,6 +23,8 @@ app.use(
 ); //enables cross origin req
 app.use(express.json());
 
+app.use("/posts", PostRoutes);
+
 config(); //access to env
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
@@ -99,7 +101,7 @@ app.get("/login/success", async (req, res) => {
   if (req.user) {
     res.status(200).json({ user: req.user });
   } else {
-    res.status(400).json({ message: "Not Authorized" });
+    res.status(400).json({ message: "Not authorized" });
   }
 });
 
@@ -125,5 +127,3 @@ mongoose
 app.get("/", (req, res) => {
   res.json("hello");
 });
-
-app.use("/posts", PostRoutes);
