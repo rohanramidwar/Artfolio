@@ -35,10 +35,6 @@ app.use(
     secret: "12872kqkga2813b",
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      secure: true, // set true if using https
-      sameSite: "lax", // set sameSite policy
-    },
   })
 );
 
