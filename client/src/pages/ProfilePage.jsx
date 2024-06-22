@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const { creator, isLoading } = useSelector((state) => state?.posts);
 
   return (
-    <div className="px-8 sm:px-14 py-5 text-slate-900">
+    <div className="px-5 sm:px-14 py-5 text-slate-900">
       <div className="flex flex-col items-center gap-3">
         <img
           className="w-[120px] h-[120px] rounded-full"

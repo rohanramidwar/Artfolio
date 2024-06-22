@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { Bookmark, Edit, Heart, Trash } from "lucide-react";
+import { Bookmark, Edit, Heart, Mail, Trash } from "lucide-react";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import EditProject from "./EditProject";
 import { useDispatch } from "react-redux";
@@ -70,7 +70,7 @@ const ProjectDesc = ({ post }) => {
               </button>
             </div>
           ) : (
-            <div className="flex gap-8 items-center">
+            <div className="flex gap-3 sm:gap-8 items-center">
               <button className="flex gap-2 items-center">
                 <Heart size={14} />0
               </button>
@@ -79,7 +79,13 @@ const ProjectDesc = ({ post }) => {
               </button>
               <Button
                 onClick={handleEmailClick}
-                className="rounded-xl py-3 h-auto"
+                className="sm:hidden block rounded-xl py-3 h-auto"
+              >
+                <Mail size={14} />
+              </Button>
+              <Button
+                onClick={handleEmailClick}
+                className="hidden sm:block rounded-xl py-3 h-auto"
               >
                 Contact
               </Button>
@@ -87,7 +93,7 @@ const ProjectDesc = ({ post }) => {
           )}
         </div>
         <img className="w-full" src={post?.artImg} alt="art" />
-        <p className="px-8 text-xl pb-72">{post?.desc}</p>
+        <p className="px-5 sm:px-8 text-xl pb-72">{post?.desc}</p>
       </div>
     </div>
   );
