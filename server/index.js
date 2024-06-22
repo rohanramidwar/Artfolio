@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import { config } from "dotenv";
-import session from "express-session";
+import session from "cookie-session";
 import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-google-oauth2";
 import UserModel from "./models/userModel.js";
@@ -101,7 +101,7 @@ app.get("/login/success", async (req, res) => {
   if (req.user) {
     res.status(200).json({ user: req.user });
   } else {
-    res.status(400).json({ res });
+    res.status(400).json({ message: res });
   }
 });
 
