@@ -23,8 +23,6 @@ app.use(
 ); //enables cross origin req
 app.use(express.json());
 
-app.use("/posts", PostRoutes);
-
 config(); //access to env
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
@@ -131,3 +129,5 @@ mongoose
 app.get("/", (req, res) => {
   res.json("hello");
 });
+
+app.use("/posts", PostRoutes);
