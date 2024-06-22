@@ -30,9 +30,9 @@ const ProjectDesc = ({ post }) => {
 
   return (
     <div className="pt-9 flex justify-center overflow-auto text-slate-900">
-      <div className="sm:w-3/4 flex flex-col gap-8">
-        <h1 className="px-3 text-5xl font-extrabold">{post?.title}</h1>
-        <div className="px-3 flex justify-between items-center">
+      <div className="sm:w-3/4 flex flex-col gap-12">
+        <h1 className="px-3 sm:px-0 text-5xl font-extrabold">{post?.title}</h1>
+        <div className="px-3 sm:px-0 flex justify-between items-center">
           <div
             onClick={handleCreatorProfile}
             className="flex gap-2 items-center"
@@ -92,8 +92,8 @@ const ProjectDesc = ({ post }) => {
             </div>
           )}
         </div>
-        <img className="w-full" src={post?.artImg} alt="art" />
-        <p className="px-5 sm:px-8 text-xl pb-72">{post?.desc}</p>
+        <img className="w-full shadow-sm" src={post?.artImg} alt="art" />
+        <p className="px-3 sm:px-0 text-xl pb-72">{post?.desc}</p>
       </div>
     </div>
   );
