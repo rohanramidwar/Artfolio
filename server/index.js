@@ -3,12 +3,11 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import { config } from "dotenv";
-import session from "cookie-session";
+import session from "express-session";
 import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-google-oauth2";
 import UserModel from "./models/userModel.js";
 import PostRoutes from "./routes/postRoutes.js";
-import MongoStore from "connect-mongo";
 
 const app = express();
 //enable us to send post req
@@ -38,8 +37,6 @@ app.use(
     secret: "12872kqkga2813b",
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: CONNECTION_URL }),
-    cookie: { maxAge: 24 * 60 * 60 * 1000 },
   })
 );
 
@@ -100,29 +97,11 @@ app.get(
   })
 );
 
-// Utility function to remove circular references
-const getCircularReplacer = () => {
-  const seen = new WeakSet();
-  return (key, value) => {
-    if (typeof value === "object" && value !== null) {
-      if (seen.has(value)) {
-        return;
-      }
-      seen.add(value);
-    }
-    return value;
-  };
-};
-
 app.get("/login/success", async (req, res) => {
   if (req.user) {
-    res
-      .status(200)
-      .json({
-        user: JSON.parse(JSON.stringify(req.user, getCircularReplacer())),
-      });
+    res.status(200).json({ user: req.user });
   } else {
-    res.status(400).json({ message: "User not authenticated" });
+    res.status(400).json({ message: "Not authorized" });
   }
 });
 
