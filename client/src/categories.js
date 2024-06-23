@@ -1,4 +1,5 @@
 export const categories = [
+  "Discover",
   "Sketches",
   "Watercolor",
   "Pixel",

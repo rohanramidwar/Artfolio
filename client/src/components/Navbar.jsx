@@ -122,16 +122,16 @@ const Navbar = () => {
           <p>Hire artist</p>
         </ul>
       </div>
-      <div>
+      <div className="flex gap-3 lg:gap-8 items-center">
+        <input
+          className="hidden sm:block bg-gray-100 outline-none rounded-xl pl-4 py-3 pr-10 placeholder:text-slate-900 text-sm"
+          placeholder="Search"
+          onKeyDown={handleKeyPress}
+          value={search} // Change here
+          onChange={(e) => setSearch(e.target.value)}
+        />
         {user ? (
           <div className="flex gap-3 lg:gap-8 items-center">
-            <input
-              className="hidden sm:block bg-gray-100 outline-none rounded-xl pl-4 py-3 pr-10 placeholder:text-slate-900 text-sm"
-              placeholder="Search"
-              onKeyDown={handleKeyPress}
-              value={search} // Change here
-              onChange={(e) => setSearch(e.target.value)}
-            />
             <DropdownMenu>
               <DropdownMenuTrigger className="w-full">
                 <img
