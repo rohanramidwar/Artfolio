@@ -69,7 +69,9 @@ const Navbar = () => {
 
   const handleGoogleSignOut = () => {
     localStorage.clear();
+    setUser(null);
   };
+
   //store user data in local storage
   const handleGoogleSignIn = async () => {
     try {
