@@ -89,8 +89,8 @@ const Navbar = () => {
       );
 
       const userData = await response.json();
-      setUser({ userData });
-      localStorage.setItem("profile", JSON.stringify({ userData }));
+      setUser(userData);
+      localStorage.setItem("profile", JSON.stringify(userData));
       console.log("User Data:", userData);
     } catch (error) {
       console.error("Error during sign-in:", error);
