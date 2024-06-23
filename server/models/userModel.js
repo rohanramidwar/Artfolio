@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    googleId: String,
-    displayName: String,
+    uid: String,
+    name: String,
     email: String,
-    profilePic: String,
+    picture: String,
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,
