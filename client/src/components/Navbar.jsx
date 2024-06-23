@@ -62,40 +62,38 @@ const Navbar = () => {
   }, [location]);
   const creatorId = user?._id;
 
-  const handleSignOut = () => {
-    window.open("https://artfolio-backend-blond.vercel.app/logout", "_self");
-    localStorage.clear();
-  };
-
-  //store user data in local storage
-  const fetchUserData = async () => {
-    try {
-      const res = await axios.get(
-        "https://artfolio-backend-blond.vercel.app/login/success",
-        {
-          withCredentials: true,
-        }
-      );
-      console.log("res", res);
-      setUser({ ...res.data.user });
-      localStorage.setItem("profile", JSON.stringify({ ...res.data.user }));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchUserData();
-  }, []);
-
-  const handleSignIn = () => {
-    window.open(
-      "https://artfolio-backend-blond.vercel.app/auth/google/callback",
-      "_self"
-    );
-  };
-
   const handleCreatorProfile = () => {
     dispatch(getCreatorProfile({ creatorId, navigate }));
+  };
+
+  const handleGoogleSignOut = () => {
+    localStorage.clear();
+  };
+  //store user data in local storage
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log(result);
+      const token = await result.user.getIdToken();
+
+      const response = await fetch(
+        "https://artfolio-backend-blond.vercel.app/api/protected",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+
+      const userData = await response.json();
+      setUser({ userData });
+      localStorage.setItem("profile", JSON.stringify({ userData }));
+      console.log("User Data:", userData);
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+    }
   };
 
   return (
@@ -127,14 +125,14 @@ const Navbar = () => {
               <DropdownMenuTrigger className="w-full">
                 <img
                   className="w-11 h-11 rounded-full"
-                  src={user?.profilePic}
+                  src={user?.picture}
                   alt="user"
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-60">
                 <DropdownMenuLabel>
                   <div>
-                    <p className="text-lg">{user?.displayName}</p>
+                    <p className="text-lg">{user?.name}</p>
                     <p className="text-sm text-gray-500 font-normal">
                       {user?.email}
                     </p>
@@ -158,7 +156,7 @@ const Navbar = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   className="cursor-pointer"
-                  onClick={handleSignOut}
+                  onClick={handleGoogleSignOut}
                 >
                   Sign out
                 </DropdownMenuItem>
@@ -193,7 +191,7 @@ const Navbar = () => {
                   to our User Agreement and Privacy Policy.
                 </p>
                 <Button
-                  onClick={handleSignIn}
+                  onClick={handleGoogleSignIn}
                   className="flex gap-3 rounded-xl h-auto py-3"
                 >
                   <img className="w-4 h-4" src={google} alt="G" />
