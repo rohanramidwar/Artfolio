@@ -22,5 +22,5 @@ export const fetchAllPosts = () => API.get("/posts");
 export const fetchPostsBySearch = (searchQuery) =>
   API.get(`/posts/search?searchQuery=${searchQuery || none}`);
 export const fetchFilteredPosts = (category) => API.get(`/posts/${category}`);
-export const fetchCreatorProfile = (creatorId) =>
-  API.get(`/posts/creator/${creatorId}`);
+export const fetchCreatorProfile = (creator) =>
+  API.get(`/posts/creator/${creator}`);

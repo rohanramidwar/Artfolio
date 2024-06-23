@@ -1,0 +1,15 @@
+export const categories = [
+  "Sketches",
+  "Watercolor",
+  "Pixel",
+  "Sketchbook",
+  "Doodle",
+  "Reference",
+  "Illustration",
+  "Easy doodle",
+  "Canvas",
+  "Pencil art",
+  "Disney",
+  "Easy",
+  "Simple",
+];

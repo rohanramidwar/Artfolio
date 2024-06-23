@@ -39,11 +39,11 @@ const ProjectCard = ({ post }) => {
         <div onClick={handleCreatorProfile} className="flex gap-2 items-center">
           <img
             className="w-6 h-6 rounded-full cursor-pointer"
-            src={post?.creator?.profilePic}
+            src={post?.creator?.picture}
             alt="user"
           />
           <p className="hover:underline cursor-pointer">
-            {post?.creator?.displayName}
+            {post?.creator?.name}
           </p>
         </div>
         <div className="flex gap-3 items-center">

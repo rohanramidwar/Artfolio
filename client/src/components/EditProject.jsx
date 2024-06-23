@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { editPost } from "@/actions/postActions";
+import { categories } from "@/categories";
 
 const EditProject = ({ post }) => {
   const dispatch = useDispatch();
@@ -19,22 +20,6 @@ const EditProject = ({ post }) => {
   const inputRef = useRef(null);
 
   const { isLoading } = useSelector((state) => state?.posts);
-
-  const categories = [
-    "Sketches",
-    "Watercolor",
-    "Pixel",
-    "Sketchbook",
-    "Doodle",
-    "Reference",
-    "Illustration",
-    "Easy doodle",
-    "Canvas",
-    "Pencil art",
-    "Disney",
-    "Easy",
-    "Simple",
-  ];
 
   //data
   const [postData, setPostData] = useState({

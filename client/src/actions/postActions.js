@@ -86,11 +86,11 @@ export const createPost = (newPost, navigate) => async (dispatch) => {
 };
 
 export const getCreatorProfile =
-  ({ creatorId, navigate }) =>
+  ({ creator, navigate }) =>
   async (dispatch) => {
     try {
       dispatch({ type: STARTLOADING });
-      const { data } = await api.fetchCreatorProfile(creatorId);
+      const { data } = await api.fetchCreatorProfile(creator);
       dispatch({ type: FETCHCREATORPROFILE, payload: data }); //sends to reducer
       dispatch({ type: ENDLOADING });
       navigate(`/profile-page/${data?._id}`);

@@ -11,10 +11,10 @@ const ProfilePage = () => {
       <div className="flex flex-col items-center gap-3">
         <img
           className="w-[120px] h-[120px] rounded-full"
-          src={creator?.profilePic}
+          src={creator?.picture}
           alt="creator"
         />
-        <p className="text-4xl font-semibold">{creator?.displayName}</p>
+        <p className="text-4xl font-semibold">{creator?.name}</p>
         <div className="flex gap-3">
           <Button className="rounded-xl h-auto py-3 bg-zinc-100 hover:bg-zinc-100 text-slate-900">
             Contact

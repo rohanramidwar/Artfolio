@@ -39,12 +39,12 @@ const ProjectDesc = ({ post }) => {
           >
             <img
               className="w-11 h-11 rounded-full cursor-pointer"
-              src={post?.creator?.profilePic}
+              src={post?.creator?.picture}
               alt="user"
             />
             <div>
               <p className="hover:underline cursor-pointer font-medium">
-                {post?.creator?.displayName}
+                {post?.creator?.name}
               </p>
               <p className="text-violet-600 text-sm">{post?.category}</p>
             </div>

@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createPost } from "@/actions/postActions";
+import { categories } from "@/categories";
 
 const CreateProject = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -18,22 +19,6 @@ const CreateProject = ({ onClose }) => {
   const location = useLocation();
 
   const inputRef = useRef(null);
-
-  const categories = [
-    "Sketches",
-    "Watercolor",
-    "Pixel",
-    "Sketchbook",
-    "Doodle",
-    "Reference",
-    "Illustration",
-    "Easy doodle",
-    "Canvas",
-    "Pencil art",
-    "Disney",
-    "Easy",
-    "Simple",
-  ];
 
   const { isLoading } = useSelector((state) => state?.posts);
 
