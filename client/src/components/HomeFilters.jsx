@@ -29,7 +29,7 @@ const HomeFilters = () => {
             filter === category ? "bg-zinc-100" : "bg-inherit"
           }`}
         >
-          {filter}
+          {category}
         </Button>
       ))}
     </div>

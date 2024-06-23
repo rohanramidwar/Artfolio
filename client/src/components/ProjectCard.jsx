@@ -10,10 +10,10 @@ const ProjectCard = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const creatorId = post?.creator?._id;
+  const creator = post?.creator?._id;
 
   const handleCreatorProfile = () => {
-    dispatch(getCreatorProfile({ creatorId, navigate }));
+    dispatch(getCreatorProfile({ creator, navigate }));
   };
 
   return (
