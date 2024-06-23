@@ -2,7 +2,7 @@ import { getAllPosts, getPostsBySearch } from "@/actions/postActions";
 import HomeFilters from "@/components/HomeFilters";
 import ProjectCard from "@/components/ProjectCard";
 import { LoaderCircle } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
