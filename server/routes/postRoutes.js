@@ -17,5 +17,5 @@ router.get("/search", getPostsBySearch);
 router.get("/:category", getFilteredPosts);
 router.put("/edit-post", editPost);
 router.delete("/delete-post/:postId", deletePost);
-router.get("/creator/:creatorId", getCreatorProfile);
+router.get("/creator/:creator", getCreatorProfile);
 export default router;

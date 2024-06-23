@@ -100,11 +100,9 @@ export const getAllPosts = async (req, res) => {
 };
 
 export const getCreatorProfile = async (req, res) => {
-  const { creatorId } = req.params;
+  const { creator } = req.params;
   try {
-    const profile = await UserModel.findById(creatorId)
-      .populate("posts")
-      .exec();
+    const profile = await UserModel.findById(creator).populate("posts").exec();
     res.status(200).json(profile);
   } catch (error) {
     res.status(404).json({ message: error.message });
