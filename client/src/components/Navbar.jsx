@@ -22,6 +22,7 @@ import {
 } from "@/actions/postActions";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/firebase";
+import toast from "react-hot-toast";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -61,15 +62,16 @@ const Navbar = () => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
-  const creatorId = user?._id;
+  const creator = user?._id;
 
   const handleCreatorProfile = () => {
-    dispatch(getCreatorProfile({ creatorId, navigate }));
+    dispatch(getCreatorProfile({ creator, navigate }));
   };
 
   const handleGoogleSignOut = () => {
     localStorage.clear();
     setUser(null);
+    toast.success("Successfully logged out!");
   };
 
   //store user data in local storage
@@ -94,8 +96,14 @@ const Navbar = () => {
       setUser(userData);
       localStorage.setItem("profile", JSON.stringify(userData));
       console.log("User Data:", userData);
+      if (userData) {
+        toast("Successfully signed in!", {
+          icon: "🥳",
+        });
+      }
     } catch (error) {
       console.error("Error during sign-in:", error);
+      toast.error("Error during sign in!");
     }
   };
 
