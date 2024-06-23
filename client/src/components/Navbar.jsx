@@ -20,7 +20,8 @@ import {
   getCreatorProfile,
   getPostsBySearch,
 } from "@/actions/postActions";
-import axios from "axios";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/firebase";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
