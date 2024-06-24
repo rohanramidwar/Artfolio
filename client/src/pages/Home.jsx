@@ -35,9 +35,9 @@ const Home = () => {
   };
 
   return (
-    <div className="mt-8 px-5 sm:px-14">
+    <div className="px-5 sm:px-14">
       <input
-        className="block sm:hidden w-full bg-gray-100 outline-none rounded-xl pl-4 py-3 pr-10 placeholder:text-slate-900 text-sm"
+        className="mt-8 block sm:hidden w-full bg-gray-100 outline-none rounded-xl pl-4 py-3 pr-10 placeholder:text-slate-900 text-sm"
         placeholder="Search"
         onKeyDown={handleKeyPress}
         value={search} // Change here
