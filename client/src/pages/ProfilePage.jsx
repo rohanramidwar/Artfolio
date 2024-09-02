@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { LoaderCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -18,14 +17,6 @@ const ProfilePage = () => {
 
   const handleEmailClick = () => {
     window.location.href = `mailto:${creator?.email}`;
-  };
-
-  const handleSavedPostsClick = () => {
-    setShowSavedPosts(true);
-  };
-
-  const handleCreatedPostsClick = () => {
-    setShowSavedPosts(false);
   };
 
   return (
@@ -64,7 +55,7 @@ const ProfilePage = () => {
       </div>
       <div className="mt-16 flex gap-3">
         <Button
-          onClick={handleCreatedPostsClick}
+          onClick={() => setShowSavedPosts(false)}
           className={`rounded-xl h-auto py-3 ${
             !showSavedPosts
               ? "bg-zinc-100 hover:bg-zinc-100"
@@ -74,7 +65,7 @@ const ProfilePage = () => {
           Created
         </Button>
         <Button
-          onClick={handleSavedPostsClick}
+          onClick={() => setShowSavedPosts(true)}
           className={`rounded-xl h-auto py-3 ${
             showSavedPosts
               ? "bg-zinc-100 hover:bg-zinc-100"
@@ -84,36 +75,51 @@ const ProfilePage = () => {
           Saved
         </Button>
       </div>
-      {isLoading ? (
-        <div className="flex justify-center items-center py-12">
-          <LoaderCircle className="animate-spin text-violet-500" />
-        </div>
-      ) : (
+
+      {!showSavedPosts && (
         <>
+          {!creator?.posts?.length && <p className="pt-12">0 posts found</p>}
           <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {(showSavedPosts ? creator?.savedPosts : creator?.posts)?.length ? (
-              (showSavedPosts ? creator?.savedPosts : creator?.posts)?.map(
-                (post) => (
-                  <div
-                    key={post?._id}
-                    className="flex justify-center items-center group relative w-full h-full"
-                  >
-                    <img
-                      className="border w-full h-60 object-cover rounded-2xl"
-                      src={post?.artImg}
-                      alt="art"
-                    />
-                    <div className="hidden group-hover:flex profile_card-title">
-                      <p className="w-full">{post?.title}</p>
-                    </div>
-                  </div>
-                )
-              )
-            ) : (
-              <p className="pt-12 text-center">
-                {showSavedPosts ? "0 saved posts found" : "0 posts found"}
-              </p>
-            )}
+            {creator?.posts?.map((post) => (
+              <div
+                key={post?._id}
+                className="flex justify-center items-center group relative w-full h-full"
+              >
+                <img
+                  className="border w-full h-60 object-cover rounded-2xl"
+                  src={post?.artImg}
+                  alt="art"
+                />
+                <div className="hidden group-hover:flex profile_card-title">
+                  <p className="w-full">{post?.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {showSavedPosts && (
+        <>
+          {!creator?.savedPosts?.length && (
+            <p className="pt-12">0 posts found</p>
+          )}
+          <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {creator?.savedPosts?.map((post) => (
+              <div
+                key={post?._id}
+                className="flex justify-center items-center group relative w-full h-full"
+              >
+                <img
+                  className="border w-full h-60 object-cover rounded-2xl"
+                  src={post?.artImg}
+                  alt="art"
+                />
+                <div className="hidden group-hover:flex profile_card-title">
+                  <p className="w-full">{post?.title}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </>
       )}
