@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema(
         ref: "PostModel",
       },
     ],
+    savedPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PostModel",
+      },
+    ],
   },
   { timestamps: true }
 );

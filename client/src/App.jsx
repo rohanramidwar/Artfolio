@@ -9,17 +9,21 @@ import "@fontsource/inter/800.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProfilePage from "./pages/ProfilePage";
+import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-[110vh]">
       <Navbar />
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/posts/search" Component={Home} />
-        <Route path="/profile-page/:id" Component={ProfilePage} />
-      </Routes>
+      <ScrollToTop />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/posts/search" Component={Home} />
+          <Route path="/profile-page" Component={ProfilePage} />
+        </Routes>
+      </main>
       <Footer />
       <Toaster />
     </div>

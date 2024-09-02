@@ -1,10 +1,11 @@
 import { getAllPosts, getPostsBySearch } from "@/actions/postActions";
 import HomeFilters from "@/components/HomeFilters";
 import ProjectCard from "@/components/ProjectCard";
-import { LoaderCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import animationData from "../animations/loading.json";
+import Lottie from "lottie-react";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ const Home = () => {
     } else {
       navigate("/");
     }
-    setSearch("");
   };
 
   const handleKeyPress = (e) => {
@@ -44,18 +44,27 @@ const Home = () => {
         onChange={(e) => setSearch(e.target.value)}
       />
       <HomeFilters />
+
       {isLoading ? (
-        <div className="flex justify-center items-center py-12">
-          <LoaderCircle className="animate-spin text-violet-500" />
+        <div className="flex justify-center items-center pt-12">
+          <Lottie
+            animationData={animationData}
+            loop={true}
+            autoplay={true}
+            style={{ height: 100, width: 100 }}
+          />
         </div>
       ) : (
         <>
-          {!posts?.length && <p className="pt-12 text-center">0 posts found</p>}
-          <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {posts?.map((post, index) => (
-              <ProjectCard key={post?._id} post={post} />
-            ))}
-          </div>
+          {!posts?.length ? (
+            <p className="pt-12 text-center">0 posts found</p>
+          ) : (
+            <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              {posts?.map((post, index) => (
+                <ProjectCard key={post?._id} post={post} />
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>

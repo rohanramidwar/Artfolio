@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
 import { Bookmark, Heart } from "lucide-react";
 import ProjectDesc from "./ProjectDesc";
-import { getCreatorProfile } from "@/actions/postActions";
+import { getCreatorProfile, savePost } from "@/actions/postActions";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ProjectCard = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const creator = post?.creator?._id;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
+  const postId = post?._id;
+  const userId = user?._id;
 
   const handleCreatorProfile = () => {
-    dispatch(getCreatorProfile({ creator, navigate }));
+    if (user) {
+      dispatch(getCreatorProfile({ userId, navigate }));
+    } else {
+      toast.error("Please sign in first");
+    }
+  };
+
+  const handleSave = () => {
+    if (user) {
+      dispatch(savePost({ userId, postId }));
+    } else {
+      toast.error("Please sign in first");
+    }
   };
 
   return (
@@ -42,17 +62,18 @@ const ProjectCard = ({ post }) => {
             src={post?.creator?.picture}
             alt="user"
           />
-          <p className="hover:underline cursor-pointer">
-            {post?.creator?.name}
-          </p>
+          <p className="cursor-pointer">{post?.creator?.name}</p>
         </div>
         <div className="flex gap-3 items-center">
-          <p className="flex gap-2 items-center">
+          <button
+            onClick={() => toast("😓 Feature coming soon!")}
+            className="flex gap-2 items-center"
+          >
             <Heart className="text-zinc-300 fill-zinc-300" size={14} />0
-          </p>
-          <p>
+          </button>
+          <button onClick={handleSave}>
             <Bookmark className="text-zinc-300 fill-zinc-300" size={14} />
-          </p>
+          </button>
         </div>
       </div>
     </div>

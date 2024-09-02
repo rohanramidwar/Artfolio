@@ -16,10 +16,10 @@ export const deletePost = (postId, navigate) => async (dispatch) => {
   try {
     dispatch({ type: STARTLOADING });
     const { data } = await api.deletePost(postId);
-    navigate("/");
     dispatch({ type: REMOVEDELETEDPOST, payload: data });
     dispatch({ type: ENDLOADING });
     toast.success("Successfully deleted!");
+    navigate("/");
   } catch (err) {
     console.log(err);
   }
@@ -29,10 +29,10 @@ export const editPost = (newData, navigate) => async (dispatch) => {
   try {
     dispatch({ type: STARTLOADING });
     const { data } = await api.editPost(newData);
-    navigate("/");
     dispatch({ type: UPDATEPOSTS, payload: data });
     dispatch({ type: ENDLOADING });
     toast.success("Successfully edited!");
+    navigate("/");
   } catch (err) {
     console.log(err);
   }
@@ -77,23 +77,33 @@ export const createPost = (newPost, navigate) => async (dispatch) => {
     dispatch({ type: STARTLOADING });
     const { data } = await api.createPost(newPost);
     dispatch({ type: CREATEPOST, payload: data });
-    navigate("/");
     dispatch({ type: ENDLOADING });
     toast.success("Successfully created!");
+    navigate("/");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const savePost = (idz) => async (dispatch) => {
+  try {
+    const { data } = await api.savePost(idz);
+    //sends to reducer
+    toast.success("Post Saved!");
   } catch (err) {
     console.log(err);
   }
 };
 
 export const getCreatorProfile =
-  ({ creator, navigate }) =>
+  ({ userId, navigate }) =>
   async (dispatch) => {
     try {
-      dispatch({ type: STARTLOADING });
-      const { data } = await api.fetchCreatorProfile(creator);
+      toast("Please wait while fetching profile page");
+      const { data } = await api.fetchCreatorProfile(userId);
       dispatch({ type: FETCHCREATORPROFILE, payload: data }); //sends to reducer
-      dispatch({ type: ENDLOADING });
-      navigate(`/profile-page/${data?._id}`);
+
+      navigate("/profile-page");
     } catch (err) {
       console.log(err);
     }

@@ -65,7 +65,7 @@ const Navbar = () => {
   const creator = user?._id;
 
   const handleCreatorProfile = () => {
-    dispatch(getCreatorProfile({ creator, navigate }));
+    dispatch(getCreatorProfile({ userId: creator, navigate }));
   };
 
   const handleGoogleSignOut = () => {

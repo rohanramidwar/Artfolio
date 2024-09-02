@@ -19,8 +19,9 @@ export const deletePost = (postId) =>
 export const editPost = (newData) => API.put("/posts/edit-post", newData);
 export const createPost = (newPost) => API.post("/posts", newPost); //sends data
 export const fetchAllPosts = () => API.get("/posts");
+export const savePost = (idz) => API.put("/posts/save-post", idz);
 export const fetchPostsBySearch = (searchQuery) =>
   API.get(`/posts/search?searchQuery=${searchQuery || none}`);
 export const fetchFilteredPosts = (category) => API.get(`/posts/${category}`);
-export const fetchCreatorProfile = (creator) =>
-  API.get(`/posts/creator/${creator}`);
+export const fetchCreatorProfile = (userId) =>
+  API.get(`/posts/creator/${userId}`);

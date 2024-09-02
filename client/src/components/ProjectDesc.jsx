@@ -24,26 +24,19 @@ const ProjectDesc = ({ post }) => {
     window.location.href = `mailto:${post?.creator?.email}`;
   };
 
-  const handleCreatorProfile = () => {
-    dispatch(getCreatorProfile({ creatorId, navigate }));
-  };
-
   return (
     <div className="pt-9 flex justify-center overflow-auto text-slate-900">
       <div className="sm:w-3/4 flex flex-col gap-12">
         <h1 className="px-3 sm:px-0 text-5xl font-extrabold">{post?.title}</h1>
         <div className="px-3 sm:px-0 flex justify-between items-center">
-          <div
-            onClick={handleCreatorProfile}
-            className="flex gap-2 items-center"
-          >
+          <div className="flex gap-2 items-center">
             <img
               className="w-11 h-11 rounded-full cursor-pointer"
               src={post?.creator?.picture}
               alt="user"
             />
             <div>
-              <p className="hover:underline cursor-pointer font-medium">
+              <p className="cursor-pointer font-medium">
                 {post?.creator?.name}
               </p>
               <p className="text-violet-600 text-sm">{post?.category}</p>

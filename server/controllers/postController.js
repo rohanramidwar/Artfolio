@@ -72,6 +72,22 @@ export const createPost = async (req, res) => {
   }
 };
 
+export const savePost = async (req, res) => {
+  const { userId, postId } = req.body;
+
+  try {
+    await UserModel.findByIdAndUpdate(
+      userId, //user id
+      { $push: { savedPosts: postId } },
+      { new: true }
+    );
+
+    res.status(201).json("Post saved");
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 export const getPostsBySearch = async (req, res) => {
   const { searchQuery } = req.query;
   try {
@@ -100,9 +116,12 @@ export const getAllPosts = async (req, res) => {
 };
 
 export const getCreatorProfile = async (req, res) => {
-  const { creator } = req.params;
+  const { userId } = req.params;
   try {
-    const profile = await UserModel.findById(creator).populate("posts").exec();
+    const profile = await UserModel.findById(userId)
+      .populate("posts")
+      .populate("savedPosts");
+
     res.status(200).json(profile);
   } catch (error) {
     res.status(404).json({ message: error.message });

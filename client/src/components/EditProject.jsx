@@ -24,30 +24,10 @@ const EditProject = ({ post }) => {
   //data
   const [postData, setPostData] = useState({
     postId: post?._id,
-    artImg: post?.artImg,
     title: post?.title,
     desc: post?.desc,
     category: post?.category,
   });
-
-  function handleImageUpload(e) {
-    const data = new FormData();
-    data.append("file", e.target.files[0]);
-    data.append("upload_preset", "zngtpman");
-    data.append("cloud_name", "dxykak5rw");
-
-    fetch("https://api.cloudinary.com/v1_1/dxykak5rw/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setPostData({ ...postData, artImg: data.url });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
   const handleChange = (e) => {
     setPostData({ ...postData, [e.target.name]: e.target.value });
@@ -67,22 +47,6 @@ const EditProject = ({ post }) => {
           onSubmit={handleSubmit}
           className="text-lg flex flex-col gap-11 pb-72"
         >
-          <div
-            className="flex text-center items-center justify-center w-full lg:min-h-96 min-h-48 border-2 border-dashed border-zinc-300 cursor-pointer"
-            onClick={() => inputRef.current.click()}
-          >
-            {postData?.artImg ? (
-              <img src={postData?.artImg} alt="art" />
-            ) : (
-              "Choose a photo of your artwork"
-            )}
-          </div>
-          <input
-            className="hidden"
-            type="file"
-            onChange={handleImageUpload}
-            ref={inputRef}
-          />
           <label className="flex flex-col gap-5">
             Title
             <input
