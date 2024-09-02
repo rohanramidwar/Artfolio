@@ -18,14 +18,10 @@ const ProjectCard = ({ post }) => {
   }, [location]);
 
   const postId = post?._id;
-  const userId = user?._id;
+  const userId = post?.creator?._id;
 
   const handleCreatorProfile = () => {
-    if (user) {
-      dispatch(getCreatorProfile({ userId, navigate }));
-    } else {
-      toast.error("Please sign in first");
-    }
+    dispatch(getCreatorProfile({ userId, navigate }));
   };
 
   const handleSave = () => {
