@@ -40,7 +40,7 @@ const ProfilePage = () => {
 
         {user?._id === creator?._id ? (
           <Button
-            onClick={() => toast("😓 Feature coming soon!")}
+            onClick={() => toast("😅 Feature coming soon!")}
             className="rounded-xl h-auto py-3 bg-zinc-100 hover:bg-zinc-100 text-slate-900"
           >
             Edit profile
@@ -54,7 +54,7 @@ const ProfilePage = () => {
               Contact
             </Button>
             <Button
-              onClick={() => toast("😓 Feature coming soon!")}
+              onClick={() => toast("😅 Feature coming soon!")}
               className="rounded-xl h-auto py-3 bg-violet-500 hover:bg-violet-500"
             >
               Follow

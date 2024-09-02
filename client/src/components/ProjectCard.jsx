@@ -62,7 +62,7 @@ const ProjectCard = ({ post }) => {
         </div>
         <div className="flex gap-3 items-center">
           <button
-            onClick={() => toast("😓 Feature coming soon!")}
+            onClick={() => toast("😅 Feature coming soon!")}
             className="flex gap-2 items-center"
           >
             <Heart className="text-zinc-300 fill-zinc-300" size={14} />0
