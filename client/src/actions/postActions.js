@@ -99,7 +99,7 @@ export const getCreatorProfile =
   ({ userId, navigate }) =>
   async (dispatch) => {
     try {
-      const toastId = toast("⌛ Fetching profile page..");
+      const toastId = toast("Please wait while fetching..");
       const { data } = await api.fetchCreatorProfile(userId);
       dispatch({ type: FETCHCREATORPROFILE, payload: data }); //sends to reducer
       toast.dismiss(toastId);
