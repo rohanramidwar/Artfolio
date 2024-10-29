@@ -47,13 +47,10 @@ const Home = () => {
 
       {isLoading ? (
         <div className="flex justify-center items-center pt-12">
-          <Lottie
-            animationData={animationData}
-            loop={true}
-            autoplay={true}
-            style={{ height: 50, width: 50 }}
-          />
+          <div className="loader"></div>
         </div>
+
+      
       ) : (
         <>
           {!posts?.length ? (
