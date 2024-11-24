@@ -101,15 +101,24 @@ export const getPostsBySearch = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
 export const getAllPosts = async (req, res) => {
+  const { page } = req.query;
+
   try {
+    const LIMIT = 5;
+    const stIndex = (Number(page) - 1) * LIMIT; //skips earlier fetched posts
+    const totalPosts = await PostModel.countDocuments({});
+
     const posts = await PostModel.find({})
       .sort({ _id: -1 }) //latest post first
+      .limit(LIMIT)
+      .skip(stIndex)
       .populate("creator")
       .exec();
 
-    res.status(200).json(posts);
+    res
+      .status(200)
+      .json({ data: posts, noOfPages: Math.ceil(totalPosts / LIMIT) });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
