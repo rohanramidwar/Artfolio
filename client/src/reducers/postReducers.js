@@ -12,7 +12,6 @@ import {
   REMOVEDELETEDPOST,
   FETCHCREATORPROFILE,
   FETCHPOSTSBYSEARCH,
-  CLEARPOSTS,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -41,9 +40,6 @@ const posts = (state = initialState, action) => {
         posts: [...state.posts, ...payload?.data],
         noOfPages: payload?.noOfPages,
       };
-
-    case CLEARPOSTS:
-      return { ...state, posts: [], noOfPages: null };
 
     case FETCHPOSTSBYSEARCH:
       return {
