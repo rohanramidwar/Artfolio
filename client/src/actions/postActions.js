@@ -49,11 +49,14 @@ export const getFilteredPosts = (category) => async (dispatch) => {
   }
 };
 
-export const getAllPosts = () => async (dispatch) => {
+//has action type and payload
+export const getAllPosts = (page) => async (dispatch) => {
   try {
     dispatch({ type: STARTLOADING });
-    const { data } = await api.fetchAllPosts();
-    dispatch({ type: FETCHALLPOSTS, payload: data }); //sends to reducer
+    const {
+      data: { data, noOfPages },
+    } = await api.fetchAllPosts(page);
+    dispatch({ type: FETCHALLPOSTS, payload: { data, noOfPages } }); //sends to reducer
     dispatch({ type: ENDLOADING });
   } catch (err) {
     console.log(err);
