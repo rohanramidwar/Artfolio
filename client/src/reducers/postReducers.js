@@ -12,12 +12,14 @@ import {
   REMOVEDELETEDPOST,
   FETCHCREATORPROFILE,
   FETCHPOSTSBYSEARCH,
+  CLEARPOSTS,
 } from "../constants/actionTypes";
 
 const initialState = {
   posts: [],
   creator: null,
   isLoading: false,
+  noOfPages: 2,
 };
 
 const posts = (state = initialState, action) => {
@@ -36,8 +38,12 @@ const posts = (state = initialState, action) => {
     case FETCHALLPOSTS:
       return {
         ...state,
-        posts: payload,
+        posts: [...state.posts, ...payload?.data],
+        noOfPages: payload?.noOfPages,
       };
+
+    case CLEARPOSTS:
+      return { ...state, posts: [], noOfPages: null };
 
     case FETCHPOSTSBYSEARCH:
       return {
