@@ -1,35 +1,25 @@
 import { getAllPosts, getPostsBySearch } from "@/actions/postActions";
 import HomeFilters from "@/components/HomeFilters";
 import ProjectCard from "@/components/ProjectCard";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const PostPlaceholder = () => (
   <div className="flex flex-col gap-3">
-    {/* Image placeholder */}
     <div className="flex justify-center items-center relative w-full">
       <div className="w-full h-60 rounded-2xl bg-gray-200 animate-pulse" />
     </div>
-
-    {/* Bottom section with profile and actions */}
     <div className="px-2 flex justify-between text-sm font-medium">
-      {/* Profile section placeholder */}
       <div className="flex gap-2 items-center">
-        {/* Avatar placeholder */}
         <div className="w-6 h-6 rounded-full bg-gray-200 animate-pulse" />
-        {/* Name placeholder */}
         <div className="w-24 h-4 rounded bg-gray-200 animate-pulse" />
       </div>
-
-      {/* Actions placeholder */}
       <div className="flex gap-3 items-center">
-        {/* Like button placeholder */}
         <div className="flex gap-2 items-center">
           <div className="w-4 h-4 rounded bg-gray-200 animate-pulse" />
           <div className="w-3 h-4 rounded bg-gray-200 animate-pulse" />
         </div>
-        {/* Bookmark button placeholder */}
         <div className="w-4 h-4 rounded bg-gray-200 animate-pulse" />
       </div>
     </div>
@@ -42,50 +32,61 @@ const Home = () => {
   const location = useLocation();
 
   const { posts, noOfPages, isLoading } = useSelector((state) => state?.posts);
-  const [loadingNewPosts, setLoadingNewPosts] = useState(false);
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+  // Update displayed posts when posts change
   useEffect(() => {
     if (posts && !isLoading) {
-      setDisplayedPosts(posts);
+      setDisplayedPosts((prevPosts) => {
+        // For first page, replace all posts
+        if (page === 1) return posts;
+        
+        // For subsequent pages, add new posts that aren't already displayed
+        const newPosts = posts.filter(
+          (post) => !prevPosts.some((prevPost) => prevPost._id === post._id)
+        );
+        return [...prevPosts, ...newPosts];
+      });
     }
-  }, [posts, isLoading]);
+  }, [posts, isLoading, page]);
 
+  // Initial posts load
   useEffect(() => {
     dispatch(getAllPosts(1));
   }, [dispatch]);
 
+  // Load more posts when page changes
   useEffect(() => {
     if (page > 1) {
-      setLoadingNewPosts(true);
+      setIsLoadingMore(true);
       dispatch(getAllPosts(page)).then(() => {
-        setLoadingNewPosts(false);
+        setIsLoadingMore(false);
       });
     }
   }, [dispatch, page]);
 
-  const handleInfiniteScroll = async () => {
-    try {
-      if (
-        !loadingNewPosts &&
-        page <= noOfPages &&
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-          document.documentElement.scrollHeight
-      ) {
-        setPage((prev) => prev + 1);
-      }
-    } catch (error) {
-      console.log(error.message);
+  // Infinite scroll handler
+  const handleInfiniteScroll = useCallback(() => {
+    if (
+      !isLoadingMore && 
+      page < noOfPages && 
+      window.innerHeight + document.documentElement.scrollTop + 1 >= 
+      document.documentElement.scrollHeight
+    ) {
+      setPage((prevPage) => prevPage + 1);
     }
-  };
+  }, [isLoadingMore, page, noOfPages]);
 
+  // Add and remove scroll event listener
   useEffect(() => {
     window.addEventListener("scroll", handleInfiniteScroll);
     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-  }, [page, noOfPages, loadingNewPosts]);
+  }, [handleInfiniteScroll]);
 
+  // Search functionality
   const searchPost = () => {
     if (search.trim()) {
       dispatch(getPostsBySearch(search, navigate));
@@ -112,8 +113,8 @@ const Home = () => {
       <HomeFilters />
 
       <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {isLoading ? (
-          // Show placeholders during initial loading
+        {isLoading && page === 1 ? (
+          // Initial loading placeholders
           [...Array(8)].map((_, index) => (
             <PostPlaceholder key={`initial-placeholder-${index}`} />
           ))
@@ -121,12 +122,13 @@ const Home = () => {
           <p className="pt-12 text-center col-span-full">0 posts found</p>
         ) : (
           <>
+            {/* Existing posts */}
             {displayedPosts?.map((post) => (
               <ProjectCard key={post?._id} post={post} />
             ))}
 
-            {/* Show placeholders for new posts being loaded */}
-            {loadingNewPosts &&
+            {/* Loading more posts placeholders - only show new placeholders */}
+            {isLoadingMore &&
               [...Array(4)].map((_, index) => (
                 <PostPlaceholder key={`scroll-placeholder-${index}`} />
               ))}
