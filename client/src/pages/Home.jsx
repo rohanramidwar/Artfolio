@@ -115,7 +115,7 @@ const Home = () => {
       <div className="py-12 sm:grid flex flex-col sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {isLoading && page === 1 ? (
           // Initial loading placeholders
-          [...Array(8)].map((_, index) => (
+          [...Array(5)].map((_, index) => (
             <PostPlaceholder key={`initial-placeholder-${index}`} />
           ))
         ) : !displayedPosts?.length ? (
