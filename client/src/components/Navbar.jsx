@@ -109,11 +109,11 @@ const Navbar = () => {
   return (
     <div className="flex justify-between text-slate-700 px-5 sm:px-8 py-3 border-b">
       <div className="flex gap-12 font-medium text-sm items-center">
-        <Link to="/">
-          <div onClick={() => dispatch(getAllPosts())}>
+       
+          <div >
             <img className="w-12 h-12" src={logo} alt="logo" />
           </div>
-        </Link>
+      
         <ul className="lg:flex gap-12 hidden">
           <p>Find artist</p>
           <p>Inspiration</p>
